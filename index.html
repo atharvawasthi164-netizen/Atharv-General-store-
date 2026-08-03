@@ -7,20 +7,23 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  font-family:Arial,sans-serif;
  background:#f4f6f5;
  color:#222;
 }
+
 header{
  background:#138a3d;
  color:white;
  padding:16px;
  position:sticky;
  top:0;
- z-index:10;
+ z-index:20;
 }
+
 .header{
  max-width:1100px;
  margin:auto;
@@ -29,6 +32,7 @@ header{
  justify-content:space-between;
  gap:10px;
 }
+
 h1{margin:0;font-size:24px}
 .tag{font-size:13px;margin-top:4px}
 
@@ -39,6 +43,7 @@ h1{margin:0;font-size:24px}
  background:white;
  color:#138a3d;
  font-weight:bold;
+ cursor:pointer;
 }
 
 .search{
@@ -46,6 +51,7 @@ h1{margin:0;font-size:24px}
  margin:15px auto;
  padding:0 15px;
 }
+
 .search input{
  width:100%;
  padding:14px;
@@ -57,7 +63,11 @@ h1{margin:0;font-size:24px}
 main{
  max-width:1100px;
  margin:auto;
- padding:0 15px 120px;
+ padding:0 15px 140px;
+}
+
+.sectionTitle{
+ margin-top:22px;
 }
 
 .cat{
@@ -97,7 +107,7 @@ main{
 
 .name{
  font-weight:bold;
- font-size:17px;
+ font-size:16px;
  margin:10px 0 5px;
  min-height:40px;
 }
@@ -117,16 +127,41 @@ main{
  background:#138a3d;
  color:white;
  font-weight:bold;
+ cursor:pointer;
+}
+
+.infoGrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin:15px 0 25px;
+}
+
+.info{
+ background:white;
+ border-radius:12px;
+ padding:13px;
+ box-shadow:0 2px 8px #00000010;
+}
+
+.info b{
+ display:block;
+ margin-bottom:5px;
+}
+
+.info a{
+ color:#138a3d;
+ text-decoration:none;
 }
 
 #cartPanel{
  display:none;
  position:fixed;
- z-index:20;
+ z-index:30;
  bottom:12px;
  left:12px;
  right:12px;
- max-width:540px;
+ max-width:560px;
  margin:auto;
  background:white;
  border-radius:18px;
@@ -142,6 +177,7 @@ main{
  background:#eee;
  border-radius:8px;
  padding:6px 10px;
+ cursor:pointer;
 }
 
 .cartItem{
@@ -156,7 +192,8 @@ main{
  border:1px solid #ddd;
  background:white;
  border-radius:6px;
- padding:2px 7px;
+ padding:2px 8px;
+ cursor:pointer;
 }
 
 .form input,
@@ -181,6 +218,7 @@ main{
  color:white;
  font-weight:bold;
  margin-top:8px;
+ cursor:pointer;
 }
 
 .call{
@@ -206,1219 +244,249 @@ main{
  color:#555;
 }
 
+.footer{
+ background:#138a3d;
+ color:white;
+ text-align:center;
+ padding:25px 15px;
+}
+
+.footer a{
+ color:white;
+}
+
 @media(max-width:800px){
- .grid{grid-template-columns:repeat(2,1fr)}
- .photo{height:145px}
+
+ .grid{
+  grid-template-columns:repeat(2,1fr);
+ }
+
+ .photo{
+  height:145px;
+ }
+
+ .infoGrid{
+  grid-template-columns:repeat(2,1fr);
+ }
+
 }
 
 @media(max-width:430px){
- .name{font-size:15px}
- .price{font-size:15px}
- .photo{height:130px}
+
+ .name{
+  font-size:15px;
+ }
+
+ .price{
+  font-size:15px;
+ }
+
+ .photo{
+  height:130px;
+ }
+
+ .infoGrid{
+  grid-template-columns:1fr 1fr;
+ }
+
 }
 </style>
 </head>
 
+
 <body>
 
 <header>
+
 <div class="header">
 
 <div>
+
 <h1>🛒 Atharv General Store</h1>
-<div class="tag">Daily Grocery & Household Essentials</div>
+
+<div class="tag">
+Daily Grocery & Household Essentials
 </div>
 
+</div>
+
+
 <button class="cartBtn" onclick="openCart()">
-🛍️ Cart (<span id="cartCount">0</span>)
+
+🛍️ Cart
+(<span id="cartCount">0</span>)
+
 </button>
 
 </div>
+
 </header>
 
 
+
 <div class="search">
+
 <input
 id="search"
-placeholder="🔎 Search product..."
+placeholder="🔍 Search product..."
 oninput="searchProducts()">
+
 </div>
 
 
-<main id="products"></main>
+
+<main>
+
+<h2 class="sectionTitle">
+🛒 Product Catalog
+</h2>
+
+
+<div class="infoGrid">
+
+<div class="info">
+
+<b>🚚 Delivery</b>
+
+₹5 delivery<br>
+₹100+ order = FREE
+
+</div>
+
+
+<div class="info">
+
+<b>💳 Payment</b>
+
+Cash / UPI
+
+</div>
+
+
+<div class="info">
+
+<b>⏰ Timing</b>
+
+6:00 AM – 10:00 PM
+
+</div>
+
+
+<div class="info">
+
+<b>☎️ Store Call</b>
+
+<a href="tel:8418904414">
+8418904414
+</a>
+
+</div>
+
+
+<div class="info">
+
+<b>📲 WhatsApp Order</b>
+
+<a
+href="https://wa.me/918418904414"
+target="_blank">
+
+Order on WhatsApp
+
+</a>
+
+</div>
+
+
+<div class="info">
+
+<b>📍 Location</b>
+
+Atharv General Store
+
+</div>
+
+</div>
+
+
+<div id="products"></div>
+
+</main>
+
 
 
 <!-- CART -->
 
 <div id="cartPanel">
 
-<button class="close" onclick="closeCart()">✕</button>
+<button
+class="close"
+onclick="closeCart()">
 
-<h2>🛒 Your Order</h2>
+✕
+
+</button>
+
+
+<h2>
+🛒 Cart
+</h2>
+
 
 <div id="cartItems"></div>
+
 
 <div class="form">
 
 <input
 id="customerName"
-placeholder="👤 Your Name">
+placeholder="👤 Customer name">
+
 
 <input
 id="customerPhone"
 type="tel"
-placeholder="📞 Your Mobile Number">
+placeholder="📞 Customer mobile">
+
 
 <textarea
 id="customerAddress"
-placeholder="🏠 Delivery Address"></textarea>
+placeholder="🏠 Delivery address">
+</textarea>
 
 </div>
 
-<div class="total">
-Products: ₹<span id="subtotal">0</span>
-</div>
 
 <div class="total">
-Delivery: ₹<span id="delivery">5</span>
+
+Total bill:
+₹<span id="subtotal">0</span>
+
 </div>
 
+
 <div class="total">
-Total: ₹<span id="grandTotal">5</span>
+
+🚚 Delivery:
+₹<span id="delivery">0</span>
+
 </div>
+
+
+<div class="total">
+
+Grand Total:
+₹<span id="grandTotal">0</span>
+
+</div>
+
 
 <div class="note">
-🚚 ₹5 delivery charge. ₹100+ order par delivery FREE.
-</div>
 
-<button class="order" onclick="sendWhatsApp()">
-📲 Order on WhatsApp
-</button>
-
-<a class="call" href="tel:8418904414">
-☎️ Call Store — 8418904414
-</a>
+🚚 ₹5 delivery / ₹100+ FREE
 
 </div>
 
 
-<script>
-
-const products=[
-
-{
-id:1,
-cat:"Maggi & Noodles",
-name:"Maggi Chhoti Pack",
-price:15,
-img:"maggi-15.jpg"
-},
-
-{
-id:2,
-cat:"Maggi & Noodles",
-name:"Maggi Badi / Family Pack",
-price:58,
-img:"maggi-family-58.jpg"
-},
-
-{
-id:3,
-cat:"Maggi & Noodles",
-name:"Yippee",
-price:5,
-img:"yippee-5.jpg"
-},
-
-{
-id:4,
-cat:"Chips & Snacks",
-name:"Uncle Chips Blue / Salted",
-price:5,
-img:"uncle-chips-salted-5.jpg"
-},
-
-{
-id:5,
-cat:"Chips & Snacks",
-name:"Uncle Chips Green / Masala",
-price:5,
-img:"uncle-chips-masala-5.jpg"
-},
-
-{
-id:6,
-cat:"Namkeen",
-name:"Haldiram Bhujia ₹5",
-price:5,
-img:"haldiram-bhujia-5.jpg"
-},
-
-{
-id:7,
-cat:"Namkeen",
-name:"Haldiram Bhujia ₹20",
-price:20,
-img:"haldiram-bhujia-20.jpg"
-},
-
-{
-id:8,
-cat:"Biscuits & Bakery",
-name:"Britannia Rusk ₹10",
-price:10,
-img:"rusk-10.jpg"
-},
-
-{
-id:9,
-cat:"Biscuits & Bakery",
-name:"Britannia Rusk ₹50",
-price:50,
-img:"rusk-50.jpg"
-},
-
-{
-id:10,
-cat:"Personal Care",
-name:"Godrej Expert Hair Colour Black",
-price:15,
-img:"godrej-hair-colour-15.jpg"
-},
-
-{
-id:11,
-cat:"Namkeen",
-name:"Besan Bhujia ₹5",
-price:5,
-img:"besan-bhujia-5.jpg"
-},
-
-{
-id:12,
-cat:"Namkeen",
-name:"Besan Bhujia ₹20",
-price:20,
-img:"besan-bhujia-20.jpg"
-},
-
-{
-id:13,
-cat:"Namkeen",
-name:"Navratna ₹5",
-price:5,
-img:"navratna-5.jpg"
-},
-
-{
-id:14,
-cat:"Namkeen",
-name:"Navratna ₹20",
-price:20,
-img:"navratna-20.jpg"
-},
-
-{
-id:15,
-cat:"Namkeen",
-name:"Boondi ₹10",
-price:10,
-img:"boondi-10.jpg"
-},
-
-{
-id:16,
-cat:"Grocery",
-name:"Nutrela ₹10",
-price:10,
-img:"nutrela-10.jpg"
-},
-
-{
-id:17,
-cat:"Household",
-name:"Many Poko Pants Small ₹10",
-price:10,
-img:"many-poko-small-10.jpg"
-},
-
-{
-id:18,
-cat:"Household",
-name:"Many Poko Pants Large ₹12",
-price:12,
-img:"many-poko-large-12.jpg"
-},
-
-{
-id:19,
-cat:"Household",
-name:"Vim ₹5",
-price:5,
-img:"vim-5.jpg"
-},
-
-{
-id:20,
-cat:"Household",
-name:"Vim ₹10",
-price:10,
-img:"vim-10.jpg"
-},
-
-{
-id:21,
-cat:"Household",
-name:"Surf Excel ₹10",
-price:10,
-img:"surf-excel-10.jpg"
-},
-
-{
-id:22,
-cat:"Household",
-name:"Rin ₹10",
-price:10,
-img:"rin-10.jpg"
-},
-
-{
-id:23,
-cat:"Chocolates & Candy",
-name:"Chupa Chups ₹5",
-price:5,
-img:"chupa-chups-5.jpg"
-},
-
-{
-id:24,
-cat:"Grocery & Dal",
-name:"Macaroni ₹50/kg",
-price:50,
-img:"macaroni-50.jpg"
-},
-
-{
-id:25,
-cat:"Grocery & Dal",
-name:"Urad Dal ₹130/kg",
-price:130,
-img:"urad-dal-130.jpg"
-},
-
-{
-id:26,
-cat:"Grocery & Dal",
-name:"Moong Dal ₹120/kg",
-price:120,
-img:"moong-dal-120.jpg"
-},
-
-{
-id:27,
-cat:"Grocery & Dal",
-name:"Arhar Dal ₹125/kg",
-price:125,
-img:"arhar-dal-125.jpg"
-},
-
-{
-id:28,
-cat:"Chocolates & Candy",
-name:"KitKat ₹10",
-price:10,
-img:"kitkat-10.jpg"
-},
-
-{
-id:29,
-cat:"Chocolates & Candy",
-name:"Dairy Milk ₹5",
-price:5,
-img:"dairy-milk-5.jpg"
-},
-
-{
-id:30,
-cat:"Chocolates & Candy",
-name:"Dairy Milk ₹10",
-price:10,
-img:"dairy-milk-10.jpg"
-},
-
-{
-id:31,
-cat:"Chips & Snacks",
-name:"Crax ₹5",
-price:5,
-img:"crax-5.jpg"
-},
-
-{
-id:32,
-cat:"Chips & Snacks",
-name:"Curls Crax ₹5",
-price:5,
-img:"curls-crax-5.jpg"
-},
-
-{
-id:33,
-cat:"Chocolates & Candy",
-name:"Lotte Choco Pie ₹10",
-price:10,
-img:"lotte-10.jpg"
-}
-
-];
-
-
-let cart=[];
-
-
-function render(list=products){
-
-const root=document.getElementById("products");
-
-root.innerHTML="";
-
-const groups={};
-
-list.forEach(p=>{
- if(!groups[p.cat]) groups[p.cat]=[];
- groups[p.cat].push(p);
-});
-
-
-Object.entries(groups).forEach(([cat,items])=>{
-
-const heading=document.createElement("h2");
-
-heading.className="cat";
-
-heading.textContent=cat;
-
-root.appendChild(heading);
-
-
-const grid=document.createElement("div");
-
-grid.className="grid";
-
-
-items.forEach(p=>{
-
-const card=document.createElement("div");
-
-card.className="card";
-
-
-const photo=document.createElement("div");
-
-photo.className="photo";
-
-
-const img=document.createElement("img");
-
-img.src=p.img;
-
-img.alt=p.name;
-
-img.onerror=function(){
-
-this.style.display="none";
-
-};
-
-photo.appendChild(img);
-
-card.appendChild(photo);
-
-
-card.innerHTML+=`
-
-<div class="name">${p.name}</div>
-
-<div class="price">₹${p.price}</div>
-
-`;
-
-
-const button=document.createElement("button");
-
-button.className="add";
-
-button.textContent="+ Add to Cart";
-
-button.onclick=()=>addToCart(p);
-
-card.appendChild(button);
-
-grid.appendChild(card);
-
-});
-
-
-root.appendChild(grid);
-
-});
-
-}
-
-
-function addToCart(product){
-
-const existing=cart.find(x=>x.id===product.id);
-
-if(existing){
-
-existing.qty++;
-
-}else{
-
-cart.push({
-...product,
-qty:1
-});
-
-}
-
-updateCart();
-
-openCart();
-
-}
-
-
-function changeQty(id,change){
-
-const item=cart.find(p=>p.id===id);
-
-if(!item)return;
-
-item.qty+=change;
-
-if(item.qty<=0){
-
-cart=cart.filter(p=>p.id!==id);
-
-}
-
-updateCart();
-
-}
-
-
-function updateCart(){
-
-document.getElementById("cartCount").textContent=
-cart.reduce((sum,p)=>sum+p.qty,0);
-
-
-const box=document.getElementById("cartItems");
-
-box.innerHTML="";
-
-let subtotal=0;
-
-
-cart.forEach(p=>{
-
-subtotal+=p.price*p.qty;
-
-
-box.innerHTML+=`
-
-<div class="cartItem">
-
-<span>
-
-<b>${p.name}</b><br>
-
-Qty:
-
-<span class="qty">
-
-<button onclick="changeQty(${p.id},-1)">−</button>
-
-${p.qty}
-
-<button onclick="changeQty(${p.id},1)">+</button>
-
-</span>
-
-</span>
-
-<b>₹${p.price*p.qty}</b>
-
-</div>
-
-`;
-
-});
-
-
-let delivery=0;
-
-if(subtotal>0 && subtotal<100){
-
-delivery=5;
-
-}
-
-let total=subtotal+delivery;
-
-
-document.getElementById("subtotal").textContent=subtotal;
-
-document.getElementById("delivery").textContent=delivery;
-
-document.getElementById("grandTotal").textContent=total;
-
-}
-
-
-function openCart(){
-
-document.getElementById("cartPanel").style.display="block";
-
-updateCart();
-
-}
-
-
-function closeCart(){
-
-document.getElementById("cartPanel").style.display="none";
-
-}
-
-
-function searchProducts(){
-
-const query=
-document.getElementById("search").value.toLowerCase().trim();
-
-const result=products.filter(p=>
-
-(p.name+" "+p.cat)
-.toLowerCase()
-.includes(query)
-
-);
-
-render(result);
-
-}
-
-
-function sendWhatsApp(){
-
-if(cart.length===0){
-
-alert("Please add products to cart first.");
-
-return;
-
-}
-
-
-const name=
-document.getElementById("customerName").value.trim();
-
-const phone=
-document.getElementById("customerPhone").value.trim();
-
-const address=
-document.getElementById("customerAddress").value.trim();
-
-
-if(!name || !phone || !address){
-
-alert("Please enter Name, Mobile Number and Delivery Address.");
-
-return;
-
-}
-
-
-let subtotal=0;
-
-cart.forEach(p=>{
-
-subtotal+=p.price*p.qty;
-
-});
-
-
-let delivery=subtotal>=100 ? 0 : 5;
-
-let total=subtotal+delivery;
-
-
-let productsText=cart.map(p=>
-
-`• ${p.name} × ${p.qty} = ₹${p.price*p.qty}`
-
-).join("\n");
-
-
-let message=
-
-`🛒 ATHARV GENERAL STORE ORDER
-
-👤 Name: ${name}
-
-📞 Customer Mobile: ${phone}
-
-🏠 Delivery Address:
-${address}
-
-📦 PRODUCTS:
-${productsText}
-
-💰 Products Total: ₹${subtotal}
-
-🚚 Delivery: ${delivery===0 ? "FREE" : "₹5"}
-
-✅ GRAND TOTAL: ₹${total}`;
-
-
-const whatsappNumber="918418904414";
-
-const url=
-"https://wa.me/"+whatsappNumber+
-"?text="+encodeURIComponent(message);
-
-
-window.open(url,"_blank");
-
-}
-
-
-render();
-
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Atharv General Store</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:Arial,sans-serif;
-  background:#f5f5f5;
-  color:#222;
-}
-
-header{
-  background:#087f23;
-  color:white;
-  padding:18px 12px;
-  text-align:center;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-header h1{
-  font-size:25px;
-}
-
-header p{
-  margin-top:5px;
-  font-size:14px;
-}
-
-.search{
-  padding:12px;
-  background:white;
-  position:sticky;
-  top:78px;
-  z-index:9;
-}
-
-.search input{
-  width:100%;
-  padding:13px;
-  border:1px solid #ccc;
-  border-radius:10px;
-  font-size:16px;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  padding:12px;
-  padding-bottom:100px;
-}
-
-.card{
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.12);
-  padding-bottom:10px;
-}
-
-.card img{
-  width:100%;
-  height:170px;
-  object-fit:contain;
-  background:#fff;
-  display:block;
-}
-
-.card h3{
-  font-size:15px;
-  padding:8px 8px 3px;
-}
-
-.price{
-  color:#087f23;
-  font-weight:bold;
-  font-size:17px;
-  padding:2px 8px 8px;
-}
-
-.card button{
-  width:calc(100% - 16px);
-  margin:0 8px;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#087f23;
-  color:white;
-  font-size:14px;
-  font-weight:bold;
-}
-
-.cart{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  box-shadow:0 -2px 10px rgba(0,0,0,.2);
-  padding:10px;
-  z-index:20;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.cart strong{
-  font-size:16px;
-}
-
-.whatsapp{
-  background:#25D366;
-  color:white;
-  border:none;
-  padding:12px 16px;
-  border-radius:9px;
-  font-weight:bold;
-  font-size:14px;
-}
-
-.empty{
-  display:none;
-  text-align:center;
-  padding:30px;
-  color:#777;
-  grid-column:1/-1;
-}
-
-@media(min-width:700px){
-  .products{
-    grid-template-columns:repeat(4,1fr);
-    max-width:1100px;
-    margin:auto;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>🛒 Atharv General Store</h1>
-  <p>Daily Grocery • Snacks • Personal Care</p>
-  <p>🏠 Home Delivery Available</p>
-</header>
-
-<div class="search">
-  <input
-    type="text"
-    id="search"
-    placeholder="🔍 Search product..."
-    onkeyup="searchProducts()"
-  >
-</div>
-
-<div class="products" id="products">
-
-<!-- 1 -->
-<div class="card" data-name="Maggi">
-<img src="image-1785771128414.jpg" alt="Maggi">
-<h3>Maggi</h3>
-<div class="price">₹15</div>
-<button onclick="addToCart('Maggi ₹15')">Add to Cart</button>
-</div>
-
-<!-- 2 -->
-<div class="card" data-name="Yippee">
-<img src="image-1785771159673.jpg" alt="Yippee">
-<h3>Yippee</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Yippee ₹5')">Add to Cart</button>
-</div>
-
-<!-- 3 -->
-<div class="card" data-name="Family Pack Maggi">
-<img src="image-1785771196123.jpg" alt="Family Pack Maggi">
-<h3>Maggi Family Pack</h3>
-<div class="price">₹58</div>
-<button onclick="addToCart('Maggi Family Pack ₹58')">Add to Cart</button>
-</div>
-
-<!-- 4 -->
-<div class="card" data-name="Uncle Chips Salted">
-<img src="61JXCDnK3wL._AC_UF894,1000_QL80_.jpg" alt="Uncle Chips Salted">
-<h3>Uncle Chips Salted</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Uncle Chips Salted ₹5')">Add to Cart</button>
-</div>
-
-<!-- 5 -->
-<div class="card" data-name="Uncle Chips Masala">
-<img src="61szrCRWOEL.jpg" alt="Uncle Chips Masala">
-<h3>Uncle Chips Masala</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Uncle Chips Masala ₹5')">Add to Cart</button>
-</div>
-
-<!-- 6 -->
-<div class="card" data-name="Haldiram Aloo Bhujia">
-<img src="40120504_4-haldiram-namkeen-navratta.jpg" alt="Haldiram Aloo Bhujia">
-<h3>Haldiram Aloo Bhujia</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Haldiram Aloo Bhujia ₹5')">Add to Cart</button>
-</div>
-
-<!-- 7 -->
-<div class="card" data-name="Haldiram Aloo Bhujia 20">
-<img src="40120504_4-haldiram-namkeen-navratta.jpg" alt="Haldiram Aloo Bhujia">
-<h3>Haldiram Aloo Bhujia</h3>
-<div class="price">₹20</div>
-<button onclick="addToCart('Haldiram Aloo Bhujia ₹20')">Add to Cart</button>
-</div>
-
-<!-- 8 -->
-<div class="card" data-name="Britannia Rusk">
-<img src="13-min_optimized.png" alt="Britannia Rusk">
-<h3>Britannia Rusk</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Britannia Rusk ₹10')">Add to Cart</button>
-</div>
-
-<!-- 9 -->
-<div class="card" data-name="Britannia Rusk 50">
-<img src="13-min_optimized.png" alt="Britannia Rusk">
-<h3>Britannia Rusk</h3>
-<div class="price">₹50</div>
-<button onclick="addToCart('Britannia Rusk ₹50')">Add to Cart</button>
-</div>
-
-<!-- 10 -->
-<div class="card" data-name="Godrej Expert Hair Colour">
-<img src="1656500171773_SKU-1592_0.jpg" alt="Godrej Expert Hair Colour">
-<h3>Godrej Expert Hair Colour Black</h3>
-<div class="price">₹15</div>
-<button onclick="addToCart('Godrej Expert Hair Colour ₹15')">Add to Cart</button>
-</div>
-
-<!-- 11 -->
-<div class="card" data-name="Besan Bhujia 5">
-<img src="image-1785771268630.jpg" alt="Besan Bhujia">
-<h3>Besan Bhujia</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Besan Bhujia ₹5')">Add to Cart</button>
-</div>
-
-<!-- 12 -->
-<div class="card" data-name="Besan Bhujia 20">
-<img src="image-1785771268630.jpg" alt="Besan Bhujia">
-<h3>Besan Bhujia</h3>
-<div class="price">₹20</div>
-<button onclick="addToCart('Besan Bhujia ₹20')">Add to Cart</button>
-</div>
-
-<!-- 13 -->
-<div class="card" data-name="Navratna 5">
-<img src="image-1785771312758.jpg" alt="Navratna">
-<h3>Navratna</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Navratna ₹5')">Add to Cart</button>
-</div>
-
-<!-- 14 -->
-<div class="card" data-name="Navratna 20">
-<img src="image-1785771312758.jpg" alt="Navratna">
-<h3>Navratna</h3>
-<div class="price">₹20</div>
-<button onclick="addToCart('Navratna ₹20')">Add to Cart</button>
-</div>
-
-<!-- 15 -->
-<div class="card" data-name="Boondi">
-<img src="40023498_4-nutrela-soya-chunks-mini.jpg" alt="Boondi">
-<h3>Boondi</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Boondi ₹10')">Add to Cart</button>
-</div>
-
-<!-- 16 -->
-<div class="card" data-name="Nutrela">
-<img src="40023498_4-nutrela-soya-chunks-mini.jpg" alt="Nutrela">
-<h3>Nutrela</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Nutrela ₹10')">Add to Cart</button>
-</div>
-
-<!-- 17 -->
-<div class="card" data-name="ManyPoko Pants Small">
-<img src="many-poko-pants-small-size-4-8-kg-diaper.jpg" alt="ManyPoko Pants">
-<h3>ManyPoko Pants Small</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('ManyPoko Pants Small ₹10')">Add to Cart</button>
-</div>
-
-<!-- 18 -->
-<div class="card" data-name="ManyPoko Pants Large">
-<img src="many-poko-pants-small-size-4-8-kg-diaper.jpg" alt="ManyPoko Pants">
-<h3>ManyPoko Pants Large</h3>
-<div class="price">₹12</div>
-<button onclick="addToCart('ManyPoko Pants Large ₹12')">Add to Cart</button>
-</div>
-
-<!-- 19 -->
-<div class="card" data-name="Vim 5">
-<img src="71vXsvYDH7L.jpg" alt="Vim">
-<h3>Vim</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Vim ₹5')">Add to Cart</button>
-</div>
-
-<!-- 20 -->
-<div class="card" data-name="Vim 10">
-<img src="71vXsvYDH7L.jpg" alt="Vim">
-<h3>Vim</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Vim ₹10')">Add to Cart</button>
-</div>
-
-<!-- 21 -->
-<div class="card" data-name="Surf Excel">
-<img src="SUR0070_1-AUG23_1.jpg" alt="Surf Excel">
-<h3>Surf Excel</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Surf Excel ₹10')">Add to Cart</button>
-</div>
-
-<!-- 22 -->
-<div class="card" data-name="Rin">
-<img src="rin-detergent-soap-quick-pantry-1.jpg" alt="Rin">
-<h3>Rin Detergent</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Rin ₹10')">Add to Cart</button>
-</div>
-
-<!-- 23 -->
-<div class="card" data-name="Chupa Chups">
-<img src="chupa-chups-sour-belt-1.jpg" alt="Chupa Chups">
-<h3>Chupa Chups</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Chupa Chups ₹5')">Add to Cart</button>
-</div>
-
-<!-- 24 -->
-<div class="card" data-name="Macaroni">
-<img src="Macaroni-Raw.jpg" alt="Macaroni">
-<h3>Macaroni</h3>
-<div class="price">₹50 / kg</div>
-<button onclick="addToCart('Macaroni ₹50/kg')">Add to Cart</button>
-</div>
-
-<!-- 25 -->
-<div class="card" data-name="Udad Dal">
-<img src="P-1484.jpg" alt="Udad Dal">
-<h3>Udad Dal</h3>
-<div class="price">₹130 / kg</div>
-<button onclick="addToCart('Udad Dal ₹130/kg')">Add to Cart</button>
-</div>
-
-<!-- 26 -->
-<div class="card" data-name="Moong Dal">
-<img src="image-1785771329687.jpg" alt="Moong Dal">
-<h3>Moong Dal</h3>
-<div class="price">₹120 / kg</div>
-<button onclick="addToCart('Moong Dal ₹120/kg')">Add to Cart</button>
-</div>
-
-<!-- 27 -->
-<div class="card" data-name="Arhar Dal">
-<img src="image-1785771362085.jpg" alt="Arhar Dal">
-<h3>Arhar Dal</h3>
-<div class="price">₹125 / kg</div>
-<button onclick="addToCart('Arhar Dal ₹125/kg')">Add to Cart</button>
-</div>
-
-<!-- 28 -->
-<div class="card" data-name="KitKat">
-<img src="KitKat-Chocolate-Pack.webp" alt="KitKat">
-<h3>KitKat</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('KitKat ₹10')">Add to Cart</button>
-</div>
-
-<!-- 29 -->
-<div class="card" data-name="Dairy Milk 5">
-<img src="image-1785771371833.jpg" alt="Dairy Milk">
-<h3>Dairy Milk</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Dairy Milk ₹5')">Add to Cart</button>
-</div>
-
-<!-- 30 -->
-<div class="card" data-name="Dairy Milk 10">
-<img src="image-1785771371833.jpg" alt="Dairy Milk">
-<h3>Dairy Milk</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Dairy Milk ₹10')">Add to Cart</button>
-</div>
-
-<!-- 31 -->
-<div class="card" data-name="Crax">
-<img src="crax-corn-curls.jpg" alt="Crax">
-<h3>Crax</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Crax ₹5')">Add to Cart</button>
-</div>
-
-<!-- 32 -->
-<div class="card" data-name="Curls Crax">
-<img src="crax-corn-curls.jpg" alt="Curls Crax">
-<h3>Curls Crax</h3>
-<div class="price">₹5</div>
-<button onclick="addToCart('Curls Crax ₹5')">Add to Cart</button>
-</div>
-
-<!-- 33 -->
-<div class="card" data-name="Lotte Choco Pie">
-<img src="choco-pause-button-img.png" alt="Lotte Choco Pie">
-<h3>Lotte Choco Pie</h3>
-<div class="price">₹10</div>
-<button onclick="addToCart('Lotte Choco Pie ₹10')">Add to Cart</button>
-</div>
-
-<div class="empty" id="empty">
-  Product nahi mila 😔
-</div>
-
-</div>
-
-<div class="cart">
-  <strong>🛒 Cart: <span id="count">0</span></strong>
-  <button class="whatsapp" onclick="orderWhatsApp()">
-    Order on WhatsApp
-  </button>
-</div>
-
-<script>
-
-let cart=[];
-
-function addToCart(product){
-  cart.push(product);
-  document.getElementById("count").innerText=cart.length;
-
-  alert(product + " cart me add ho gaya ✅");
-}
-
-function orderWhatsApp(){
-
-  if(cart.length===0){
-    alert("Pehle product cart me add karo.");
-    return;
-  }
-
-  let message="🛒 *Atharv General Store Order*%0A%0A";
-
-  cart.forEach((item,index)=>{
-    message += (index+1)+". "+item+"%0A";
-  });
-
-  message += "%0A📍 Home Delivery Required";
-
-  /*
-    IMPORTANT:
-    Yahan apna WhatsApp number daalna.
-    91 ke baad mobile number.
-    Example:
-    919876543210
-  */
-
-  let phone="91XXXXXXXXXX";
-
-  window.open(
-    "https://wa.me/"+phone+"?text="+message,
-    "_blank"
-  );
-}
-
-function searchProducts(){
-
-  let input=document
-    .getElementById("search")
-    .value
-    .toLowerCase();
-
-  let cards=document.querySelectorAll(".card");
-  let found=0;
-
-  cards.forEach(card=>{
-
-    let name=card
-      .getAttribute("data-name")
-      .toLowerCase();
-
-    if(name.includes(input)){
-      card.style.display="block";
-      found++;
-    }else{
-      card.style.display="none";
-    }
-
-  });
-
-  document.getElementById("empty").style.display=
-    found===0 ? "block" : "none";
-}
-
-</script>
-
-</body>
-  </html>
+<button
+class="
