@@ -1,527 +1,770 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Atharv General Store</title>
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7f5;
-  color:#222;
-}
-header{
-  background:linear-gradient(135deg,#087f45,#12a866);
-  color:white;
-  padding:25px 15px;
-  text-align:center;
-}
-header h1{margin:0;font-size:30px}
-header p{margin:8px 0 0;font-size:17px}
+<meta name="description"
+content="Atharv General Store - Grocery, snacks, household products and daily essentials.">
 
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:15px;
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f6f8;
+color:#222;
+}
+
+header{
+background:#138a36;
+color:white;
+padding:16px 18px;
+position:sticky;
+top:0;
+z-index:10;
+box-shadow:0 2px 8px #0002;
+}
+
+.head{
+max-width:1100px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+}
+
+.name{
+font-size:23px;
+font-weight:700;
+}
+
+.tag{
+font-size:12px;
+margin-top:4px;
+opacity:.9;
+}
+
+.cartbtn{
+border:0;
+border-radius:8px;
+padding:10px 13px;
+background:white;
+color:#138a36;
+font-weight:700;
+cursor:pointer;
+}
+
+.hero{
+text-align:center;
+background:white;
+padding:25px 15px;
+}
+
+.hero h1{
+color:#138a36;
+font-size:29px;
+margin-bottom:7px;
+}
+
+.hero p{
+color:#555;
+}
+
+.delivery{
+display:inline-block;
+margin-top:13px;
+padding:9px 14px;
+background:#e9f8ee;
+color:#137a32;
+border-radius:20px;
+font-size:13px;
+font-weight:700;
 }
 
 .search{
-  width:100%;
-  padding:15px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  font-size:16px;
-  margin:15px 0;
+max-width:700px;
+margin:18px auto;
+padding:0 15px;
 }
 
-.categories{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:10px;
-}
-.categories button{
-  border:0;
-  background:white;
-  padding:10px 15px;
-  border-radius:20px;
-  white-space:nowrap;
-  cursor:pointer;
-}
-.categories button.active{
-  background:#087f45;
-  color:white;
+.search input{
+width:100%;
+padding:13px 16px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+outline:0;
 }
 
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:12px;
+.container{
+max-width:1100px;
+margin:auto;
+padding:0 15px 40px;
 }
 
-.product{
-  background:white;
-  border-radius:15px;
-  padding:15px;
-  box-shadow:0 2px 10px #00000012;
+.title{
+font-size:20px;
+margin:26px 0 13px;
+border-left:5px solid #138a36;
+padding-left:9px;
 }
-.product .emoji{
-  font-size:45px;
-  text-align:center;
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
 }
-.product h3{
-  font-size:16px;
-  margin:8px 0;
+
+.card{
+background:white;
+border-radius:12px;
+padding:10px;
+box-shadow:0 2px 8px #00000012;
+overflow:hidden;
 }
+
+.photo{
+width:100%;
+height:170px;
+object-fit:contain;
+background:#fafafa;
+border-radius:9px;
+}
+
+.pname{
+font-size:15px;
+font-weight:700;
+margin-top:10px;
+min-height:38px;
+}
+
 .price{
-  font-weight:bold;
-  color:#087f45;
-  font-size:18px;
+color:#138a36;
+font-weight:700;
+font-size:14px;
+margin:7px 0 10px;
 }
+
 .add{
-  width:100%;
-  border:0;
-  background:#087f45;
-  color:white;
-  padding:10px;
-  border-radius:9px;
-  margin-top:10px;
-  font-weight:bold;
+width:100%;
+padding:9px;
+border:1px solid #138a36;
+background:white;
+color:#138a36;
+border-radius:7px;
+font-weight:700;
+cursor:pointer;
+}
+
+.add:hover{
+background:#138a36;
+color:white;
 }
 
 .cart{
-  background:white;
-  margin-top:20px;
-  padding:18px;
-  border-radius:16px;
-  box-shadow:0 2px 10px #00000012;
-}
-.cart h2{margin-top:0}
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #eee;
-  padding:10px 0;
-}
-.qty button{
-  border:0;
-  background:#e7f6ee;
-  padding:6px 10px;
-  border-radius:7px;
-  font-weight:bold;
-}
-.qty span{padding:0 8px}
-
-.total{
-  font-size:19px;
-  font-weight:bold;
-  margin-top:15px;
+background:white;
+margin-top:30px;
+padding:18px;
+border-radius:12px;
+box-shadow:0 2px 8px #00000012;
 }
 
-.form input,.form textarea{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-size:15px;
+.cart h2{
+margin-bottom:12px;
 }
-.form textarea{height:80px}
+
+.item{
+display:flex;
+justify-content:space-between;
+gap:8px;
+padding:9px 0;
+border-bottom:1px solid #eee;
+}
+
+.remove{
+border:0;
+background:#ffe5e5;
+color:#c00;
+padding:5px 8px;
+border-radius:5px;
+cursor:pointer;
+}
 
 .order{
-  width:100%;
-  border:0;
-  background:#25D366;
-  color:white;
-  padding:15px;
-  border-radius:10px;
-  margin-top:12px;
-  font-size:17px;
-  font-weight:bold;
-}
-
-.info{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  margin-top:20px;
-  line-height:1.7;
-}
-
-.info a{
-  color:#087f45;
-  font-weight:bold;
-  text-decoration:none;
+width:100%;
+margin-top:15px;
+padding:13px;
+border:0;
+border-radius:8px;
+background:#25d366;
+color:white;
+font-weight:700;
+font-size:16px;
+cursor:pointer;
 }
 
 footer{
-  text-align:center;
-  padding:25px;
-  margin-top:20px;
-  background:#087f45;
-  color:white;
+background:#18351f;
+color:white;
+text-align:center;
+padding:26px 15px;
 }
 
-.empty{
-  text-align:center;
-  color:#777;
-  padding:15px;
+footer p{
+color:#ddd;
+font-size:13px;
+margin:5px;
 }
+
+@media(max-width:800px){
+
+.grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+gap:9px;
+}
+
+.photo{
+height:145px;
+}
+
+.name{
+font-size:19px;
+}
+
+.hero h1{
+font-size:24px;
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-  <h1>🛒 Atharv General Store</h1>
-  <p>Your Local Grocery & Daily Needs Store</p>
-  <p>🚚 Home Delivery Available</p>
-</header>
 
-<div class="container">
+<div class="head">
 
-<input
-  type="text"
-  id="search"
-  class="search"
-  placeholder="🔍 Search grocery products..."
-  oninput="showProducts()"
->
+<div>
 
-<div class="categories">
-  <button class="active" onclick="setCategory('All',this)">All</button>
-  <button onclick="setCategory('Grocery',this)">Grocery</button>
-  <button onclick="setCategory('Snacks',this)">Snacks</button>
-  <button onclick="setCategory('Dairy',this)">Dairy</button>
-  <button onclick="setCategory('Household',this)">Household</button>
-  <button onclick="setCategory('Personal Care',this)">Personal Care</button>
+<div class="name">
+🛒 Atharv General Store
 </div>
 
-<h2>🛍️ Products</h2>
-
-<div id="products" class="products"></div>
-
-<div class="cart">
-
-<h2>🛒 Your Cart</h2>
-
-<div id="cartItems">
-  <div class="empty">Cart is empty</div>
+<div class="tag">
+Daily Grocery & Household Essentials
 </div>
 
-<div class="total">
-  Subtotal: ₹<span id="subtotal">0</span>
 </div>
 
-<div class="total">
-  🚚 Home Delivery: ₹<span id="delivery">0</span>
-</div>
 
-<div class="total">
-  💰 Total: ₹<span id="total">0</span>
-</div>
+<button
+class="cartbtn"
+onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">
 
-<div class="form">
+🛍️ Cart (<span id="count">0</span>)
 
-<input id="customerName" placeholder="Your Name">
-
-<input id="customerPhone" placeholder="Mobile Number">
-
-<textarea id="customerAddress"
-placeholder="Full Delivery Address"></textarea>
-
-<button class="order" onclick="orderWhatsApp()">
-  📲 Order on WhatsApp
 </button>
 
 </div>
 
+</header>
+
+
+
+<section class="hero">
+
+<h1>
+Welcome to Atharv General Store
+</h1>
+
+<p>
+Ghar ka zaroori samaan aasani se order karein.
+</p>
+
+<div class="delivery">
+🚴 Home Delivery • ₹5 Delivery • ₹100+ Free Delivery
 </div>
 
-<div class="info">
+</section>
 
-<h2>📍 Atharv General Store</h2>
 
-<p>
-📌 Azad Nagar, Bijwar, Sitapur, Uttar Pradesh
-</p>
 
-<p>
-🚚 Home Delivery Available
-</p>
+<div class="search">
 
-<p>
-💰 Delivery Charge: ₹5
-</p>
-
-<p>
-🕐 Open: 7:00 AM – 9:00 PM
-</p>
-
-<p>
-📞 <a href="tel:+918418904414">Call Store</a>
-</p>
-
-<p>
-📍 <a href="https://www.google.com/maps/search/?api=1&query=Azad+Nagar+Bijwar+Sitapur+Uttar+Pradesh" target="_blank">
-Open Location in Google Maps
-</a>
-</p>
+<input
+id="search"
+placeholder="🔍 Search product..."
+oninput="render()">
 
 </div>
 
+
+
+<main class="container">
+
+<div id="products"></div>
+
+
+<div class="cart" id="cart">
+
+<h2>
+🛍️ Your Cart
+</h2>
+
+<div id="cartItems">
+
+<p style="color:#777">
+Cart abhi empty hai.
+</p>
+
 </div>
+
+
+<button
+class="order"
+onclick="whatsappOrder()">
+
+📲 Order on WhatsApp
+
+</button>
+
+</div>
+
+</main>
+
+
 
 <footer>
-  © 2026 Atharv General Store<br>
-  Azad Nagar, Bijwar, Sitapur
+
+<h3>
+Atharv General Store
+</h3>
+
+<p>
+🕕 Open: 6:00 AM – 10:00 PM
+</p>
+
+<p>
+💳 Cash & UPI Accepted
+</p>
+
+<p>
+🚴 Home Delivery Available
+</p>
+
+<p>
+© 2026 Atharv General Store
+</p>
+
 </footer>
+
 
 
 <script>
 
-const products = [
 
-{name:"Aashirvaad Atta 5kg",price:280,cat:"Grocery",emoji:"🌾"},
-{name:"Rice 5kg",price:320,cat:"Grocery",emoji:"🍚"},
-{name:"Sugar 1kg",price:48,cat:"Grocery",emoji:"🧂"},
-{name:"Tata Salt 1kg",price:28,cat:"Grocery",emoji:"🧂"},
-{name:"Toor Dal 1kg",price:140,cat:"Grocery",emoji:"🫘"},
-{name:"Moong Dal 1kg",price:130,cat:"Grocery",emoji:"🫘"},
-{name:"Cooking Oil 1L",price:130,cat:"Grocery",emoji:"🫗"},
-{name:"Tea 250g",price:120,cat:"Grocery",emoji:"🍵"},
+const products=[
 
-{name:"Biscuit Pack",price:10,cat:"Snacks",emoji:"🍪"},
-{name:"Namkeen",price:20,cat:"Snacks",emoji:"🥨"},
-{name:"Chips",price:20,cat:"Snacks",emoji:"🥔"},
-{name:"Chocolate",price:20,cat:"Snacks",emoji:"🍫"},
-{name:"Cold Drink",price:40,cat:"Snacks",emoji:"🥤"},
 
-{name:"Milk 500ml",price:30,cat:"Dairy",emoji:"🥛"},
-{name:"Paneer 200g",price:80,cat:"Dairy",emoji:"🧀"},
-{name:"Curd",price:40,cat:"Dairy",emoji:"🥣"},
+{
+name:"Haldiram's Bhujia",
+price:"₹5 / ₹20",
+cat:"Namkeen",
+img:"images/bhujia.jpg"
+},
 
-{name:"Bath Soap",price:35,cat:"Personal Care",emoji:"🧼"},
-{name:"Shampoo Sachet",price:2,cat:"Personal Care",emoji:"🧴"},
-{name:"Toothpaste",price:60,cat:"Personal Care",emoji:"🪥"},
-{name:"Handwash",price:70,cat:"Personal Care",emoji:"🧴"},
 
-{name:"Washing Powder",price:70,cat:"Household",emoji:"🧺"},
-{name:"Dishwash Bar",price:20,cat:"Household",emoji:"🧽"},
-{name:"Toilet Cleaner",price:90,cat:"Household",emoji:"🧴"},
-{name:"Garbage Bags",price:40,cat:"Household",emoji:"🗑️"}
+{
+name:"Haldiram's Navrattan",
+price:"₹5 / ₹20",
+cat:"Namkeen",
+img:"images/navrattan.jpg"
+},
+
+
+{
+name:"Haldiram's Boondi",
+price:"₹10",
+cat:"Namkeen",
+img:"images/boondi.jpg"
+},
+
+
+{
+name:"Microni",
+price:"₹50 / kg",
+cat:"Grocery & Dal",
+img:"images/macaroni.jpg"
+},
+
+
+{
+name:"Udad Dal",
+price:"₹130 / kg",
+cat:"Grocery & Dal",
+img:"images/udad_dal.png"
+},
+
+
+{
+name:"Moong Dal",
+price:"₹120 / kg",
+cat:"Grocery & Dal",
+img:"images/moong_dal.jpg"
+},
+
+
+{
+name:"Arhar Dal",
+price:"₹125 / kg",
+cat:"Grocery & Dal",
+img:"images/arhar_dal.jpg"
+},
+
+
+{
+name:"Nutrela Soya Mini Chunks",
+price:"₹10",
+cat:"Grocery & Dal",
+img:"images/nutrela_mini_chunks.jpg"
+},
+
+
+{
+name:"Nutrela Soya Chunks",
+price:"₹10",
+cat:"Grocery & Dal",
+img:"images/nutrela_soya_chunks.jpg"
+},
+
+
+{
+name:"Vim",
+price:"₹5 / ₹10",
+cat:"Household",
+img:"images/vim.jpg"
+},
+
+
+{
+name:"Surf Excel",
+price:"₹10",
+cat:"Household",
+img:"images/surf_excel.jpg"
+},
+
+
+{
+name:"Rin",
+price:"₹10",
+cat:"Household",
+img:"images/rin.jpg"
+},
+
+
+{
+name:"MamyPoko Pants Small",
+price:"₹10",
+cat:"Baby Care",
+img:"images/mamy_poko.jpg"
+},
+
+
+{
+name:"MamyPoko Pants Large",
+price:"₹12",
+cat:"Baby Care",
+img:"images/mamy_poko.jpg"
+},
+
+
+{
+name:"KitKat",
+price:"₹10",
+cat:"Chocolate & Snacks",
+img:"images/kitkat.webp"
+},
+
+
+{
+name:"Dairy Milk",
+price:"₹5 / ₹10",
+cat:"Chocolate & Snacks",
+img:"images/dairy_milk.jpg"
+},
+
+
+{
+name:"Crax Rings",
+price:"₹5",
+cat:"Chocolate & Snacks",
+img:"images/crax_rings.jpg"
+},
+
+
+{
+name:"Crax Curls",
+price:"₹5",
+cat:"Chocolate & Snacks",
+img:"images/crax_curls.jpg"
+},
+
+
+{
+name:"Lotte Choco Pie",
+price:"₹10",
+cat:"Chocolate & Snacks",
+img:"images/lotte_choco_pie.png"
+},
+
+
+{
+name:"Chupa Chups",
+price:"₹5",
+cat:"Chocolate & Snacks",
+img:"images/chupa_chups.jpg"
+}
+
 
 ];
 
+
+
 let cart=[];
-let category="All";
 
-function setCategory(cat,button){
-  category=cat;
 
-  document.querySelectorAll(".categories button")
-  .forEach(b=>b.classList.remove("active"));
 
-  button.classList.add("active");
+function render(){
 
-  showProducts();
+const q=document
+.getElementById("search")
+.value
+.toLowerCase();
+
+
+const list=products.filter(
+
+p=>
+(p.name+" "+p.cat)
+.toLowerCase()
+.includes(q)
+
+);
+
+
+const cats=[
+
+...new Set(
+list.map(p=>p.cat)
+)
+
+];
+
+
+document.getElementById("products").innerHTML=
+
+cats.map(cat=>`
+
+<section>
+
+<h2 class="title">
+${cat}
+</h2>
+
+
+<div class="grid">
+
+
+${list
+.filter(p=>p.cat===cat)
+.map(p=>`
+
+<div class="card">
+
+
+<img
+class="photo"
+src="${p.img}"
+alt="${p.name}"
+loading="lazy">
+
+
+<div class="pname">
+${p.name}
+</div>
+
+
+<div class="price">
+${p.price}
+</div>
+
+
+<button
+class="add"
+onclick="add(${products.indexOf(p)})">
+
++ Add to Cart
+
+</button>
+
+
+</div>
+
+`).join("")}
+
+
+</div>
+
+</section>
+
+`).join("");
+
 }
 
-function showProducts(){
 
-  const search =
-    document.getElementById("search").value.toLowerCase();
 
-  const box=document.getElementById("products");
+function add(i){
 
-  box.innerHTML="";
+cart.push(products[i]);
 
-  products
-  .filter(p =>
-    (category==="All" || p.cat===category) &&
-    p.name.toLowerCase().includes(search)
-  )
-  .forEach((p,index)=>{
+updateCart();
 
-    const div=document.createElement("div");
-
-    div.className="product";
-
-    div.innerHTML=`
-
-      <div class="emoji">${p.emoji}</div>
-
-      <h3>${p.name}</h3>
-
-      <div class="price">₹${p.price}</div>
-
-      <button class="add" onclick="addToCart(${products.indexOf(p)})">
-        ➕ Add to Cart
-      </button>
-
-    `;
-
-    box.appendChild(div);
-
-  });
 }
 
-function addToCart(index){
 
-  const product=products[index];
 
-  const existing=cart.find(i=>i.name===product.name);
+function removeItem(i){
 
-  if(existing){
-    existing.qty++;
-  }else{
-    cart.push({...product,qty:1});
-  }
+cart.splice(i,1);
 
-  updateCart();
+updateCart();
+
 }
 
-function changeQty(index,amount){
 
-  cart[index].qty += amount;
-
-  if(cart[index].qty<=0){
-    cart.splice(index,1);
-  }
-
-  updateCart();
-}
 
 function updateCart(){
 
-  const box=document.getElementById("cartItems");
+document.getElementById("count").textContent=cart.length;
 
-  box.innerHTML="";
 
-  if(cart.length===0){
+document.getElementById("cartItems").innerHTML=
 
-    box.innerHTML='<div class="empty">Cart is empty</div>';
+cart.length
 
-  }else{
+?
 
-    cart.forEach((item,index)=>{
+cart.map((p,i)=>`
 
-      box.innerHTML += `
+<div class="item">
 
-      <div class="cart-item">
+<span>
 
-        <div>
-          <b>${item.emoji} ${item.name}</b><br>
-          ₹${item.price} × ${item.qty}
-        </div>
+<b>
+${p.name}
+</b>
 
-        <div class="qty">
+<br>
 
-          <button onclick="changeQty(${index},-1)">−</button>
+<small>
+${p.price}
+</small>
 
-          <span>${item.qty}</span>
+</span>
 
-          <button onclick="changeQty(${index},1)">+</button>
 
-        </div>
+<button
+class="remove"
+onclick="removeItem(${i})">
 
-      </div>
+Remove
 
-      `;
+</button>
 
-    });
+</div>
 
-  }
+`).join("")
 
-  let subtotal=cart.reduce(
-    (sum,item)=>sum+(item.price*item.qty),0
-  );
+:
 
-  let delivery=subtotal>0 ? 5 : 0;
+'<p style="color:#777">Cart abhi empty hai.</p>';
 
-  document.getElementById("subtotal").innerText=subtotal;
-  document.getElementById("delivery").innerText=delivery;
-  document.getElementById("total").innerText=subtotal+delivery;
 }
 
-function orderWhatsApp(){
 
-  if(cart.length===0){
-    alert("Please add products to your cart first.");
-    return;
-  }
 
-  const name=document.getElementById("customerName").value.trim();
-  const phone=document.getElementById("customerPhone").value.trim();
-  const address=document.getElementById("customerAddress").value.trim();
+/* YAHAN APNA WHATSAPP NUMBER DALO */
 
-  if(!name || !phone || !address){
+const whatsappNumber="918418904414";
 
-    alert("Please enter your Name, Mobile Number and Address.");
 
-    return;
-  }
 
-  let subtotal=cart.reduce(
-    (sum,item)=>sum+(item.price*item.qty),0
-  );
+function whatsappOrder(){
 
-  let total=subtotal+5;
+if(!cart.length){
 
-  let message=
-`🛒 *NEW ORDER - ATHARV GENERAL STORE*
+alert("Pehle cart me product add karo.");
 
-👤 Name: ${name}
-📞 Mobile: ${phone}
-🏠 Address: ${address}
+return;
 
-*ORDER DETAILS:*
-
-`;
-
-  cart.forEach(item=>{
-
-    message +=
-`• ${item.name} × ${item.qty} = ₹${item.price*item.qty}
-`;
-
-  });
-
-  message +=
-`
-Subtotal: ₹${subtotal}
-Delivery: ₹5
-*TOTAL: ₹${total}*
-
-Thank you 🙏`;
-
-  /*
-  IMPORTANT:
-  Replace 91XXXXXXXXXX below
-  with your WhatsApp number.
-
-  Example:
-  919876543210
-  */
-
-  const shopWhatsApp="918418904414";
-
-  const url=
-  "https://wa.me/"+shopWhatsApp+
-  "?text="+encodeURIComponent(message);
-
-  window.open(url,"_blank");
 }
 
-showProducts();
-updateCart();
+
+let msg=
+"🛒 *Atharv General Store Order*%0A%0A";
+
+
+cart.forEach((p,i)=>{
+
+msg+=
+`${i+1}. ${p.name} - ${p.price}%0A`;
+
+});
+
+
+msg+=
+"%0A📦 Please confirm availability and final amount.";
+
+
+window.open(
+
+`https://wa.me/${whatsappNumber}?text=${msg}`,
+
+"_blank"
+
+);
+
+}
+
+
+render();
+
 
 </script>
 
+
 </body>
-</html>
+
+</html>      
