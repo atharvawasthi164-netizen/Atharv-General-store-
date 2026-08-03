@@ -6,293 +6,545 @@
 <title>Atharv General Store</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f4f6f5;
- color:#222;
+*{
+  box-sizing:border-box;
 }
 
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f8f8;
+  color:#222;
+}
+
+/* HEADER */
+
 header{
- background:#138a3d;
- color:white;
- padding:16px;
- position:sticky;
- top:0;
- z-index:20;
+  background:#138a3d;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
 }
 
 .header{
- max-width:1100px;
- margin:auto;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px;
+  max-width:1180px;
+  margin:auto;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
 
-h1{margin:0;font-size:24px}
-.tag{font-size:13px;margin-top:4px}
+.logo h1{
+  margin:0;
+  font-size:24px;
+}
 
-.cartBtn{
- border:0;
- border-radius:10px;
- padding:11px 14px;
- background:white;
- color:#138a3d;
- font-weight:bold;
- cursor:pointer;
+.logo p{
+  margin:4px 0 0;
+  font-size:13px;
+  opacity:.9;
+}
+
+.header-cart{
+  border:0;
+  background:white;
+  color:#138a3d;
+  padding:10px 15px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* SEARCH */
+
+.search-wrap{
+  max-width:1180px;
+  margin:auto;
+  padding:15px;
 }
 
 .search{
- max-width:1100px;
- margin:15px auto;
- padding:0 15px;
+  width:100%;
+  padding:15px 17px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+  background:white;
 }
 
-.search input{
- width:100%;
- padding:14px;
- border:1px solid #ddd;
- border-radius:12px;
- font-size:16px;
-}
+/* MAIN */
 
 main{
- max-width:1100px;
- margin:auto;
- padding:0 15px 140px;
+  max-width:1180px;
+  margin:auto;
+  padding:0 15px 150px;
 }
 
-.sectionTitle{
- margin-top:22px;
+.catalog-title{
+  font-size:24px;
+  margin:5px 0 20px;
 }
 
-.cat{
- border-left:6px solid #138a3d;
- padding-left:10px;
- margin:26px 0 13px;
+.category{
+  margin:28px 0 14px;
+  font-size:21px;
+  border-left:5px solid #138a3d;
+  padding-left:10px;
 }
 
-.grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:14px;
+/* PRODUCT GRID */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
-.card{
- background:white;
- padding:10px;
- border-radius:15px;
- box-shadow:0 2px 10px #00000012;
+.product{
+  background:white;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  position:relative;
+  min-width:0;
 }
 
-.photo{
- height:170px;
- border-radius:11px;
- display:flex;
- align-items:center;
- justify-content:center;
- background:white;
- overflow:hidden;
+.product-image{
+  height:175px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
 }
 
-.photo img{
- width:100%;
- height:100%;
- object-fit:contain;
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
 
-.name{
- font-weight:bold;
- font-size:16px;
- margin:10px 0 5px;
- min-height:40px;
+.product-name{
+  font-weight:bold;
+  font-size:15px;
+  line-height:1.3;
+  margin-top:10px;
+  min-height:40px;
 }
 
-.price{
- font-weight:bold;
- color:#138a3d;
- font-size:17px;
- margin-bottom:8px;
+.product-price{
+  font-size:17px;
+  color:#138a3d;
+  font-weight:bold;
+  margin:6px 0 10px;
 }
 
-.add{
- width:100%;
- border:0;
- border-radius:9px;
- padding:10px;
- background:#138a3d;
- color:white;
- font-weight:bold;
- cursor:pointer;
+/* PROFESSIONAL ADD BUTTON */
+
+.add-area{
+  height:38px;
 }
 
-.infoGrid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:12px;
- margin:15px 0 25px;
+.add-button{
+  width:100%;
+  height:38px;
+  background:white;
+  border:1.5px solid #138a3d;
+  color:#138a3d;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.quantity-control{
+  width:100%;
+  height:38px;
+  background:#138a3d;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  overflow:hidden;
+  color:white;
+  font-weight:bold;
+}
+
+.quantity-control button{
+  height:100%;
+  width:35px;
+  border:0;
+  background:#138a3d;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.quantity-control span{
+  font-size:15px;
+}
+
+/* STORE INFO */
+
+.store-info{
+  margin-top:40px;
+}
+
+.store-info h2{
+  border-left:5px solid #138a3d;
+  padding-left:10px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
 }
 
 .info{
- background:white;
- border-radius:12px;
- padding:13px;
- box-shadow:0 2px 8px #00000010;
+  background:white;
+  padding:15px;
+  border-radius:13px;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+
+.info-icon{
+  font-size:24px;
 }
 
 .info b{
- display:block;
- margin-bottom:5px;
+  display:block;
+  margin:5px 0;
 }
 
-.info a{
- color:#138a3d;
- text-decoration:none;
+/* STICKY CART BAR */
+
+.cart-bar{
+  display:none;
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:15px;
+  width:calc(100% - 30px);
+  max-width:600px;
+  background:#138a3d;
+  color:white;
+  border-radius:13px;
+  padding:7px;
+  z-index:150;
+  box-shadow:0 5px 25px rgba(0,0,0,.3);
 }
 
-#cartPanel{
- display:none;
- position:fixed;
- z-index:30;
- bottom:12px;
- left:12px;
- right:12px;
- max-width:560px;
- margin:auto;
- background:white;
- border-radius:18px;
- padding:18px;
- box-shadow:0 4px 30px #0005;
- max-height:90vh;
- overflow:auto;
+.cart-bar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.close{
- float:right;
- border:0;
- background:#eee;
- border-radius:8px;
- padding:6px 10px;
- cursor:pointer;
+.cart-summary{
+  padding-left:10px;
 }
 
-.cartItem{
- display:flex;
- justify-content:space-between;
- gap:10px;
- border-bottom:1px solid #eee;
- padding:9px 0;
+.cart-summary small{
+  display:block;
+  opacity:.9;
 }
 
-.qty button{
- border:1px solid #ddd;
- background:white;
- border-radius:6px;
- padding:2px 8px;
- cursor:pointer;
+.view-cart{
+  border:0;
+  background:white;
+  color:#138a3d;
+  font-weight:bold;
+  padding:12px 15px;
+  border-radius:9px;
+  cursor:pointer;
 }
 
-.form input,
-.form textarea{
- width:100%;
- padding:11px;
- margin:5px 0;
- border:1px solid #ddd;
- border-radius:9px;
+/* CART OVERLAY */
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:180;
 }
 
-.form textarea{
- min-height:75px;
+.overlay.active{
+  display:block;
 }
 
-.order{
- width:100%;
- padding:13px;
- border:0;
- border-radius:10px;
- background:#25d366;
- color:white;
- font-weight:bold;
- margin-top:8px;
- cursor:pointer;
+/* CART DRAWER */
+
+.cart-drawer{
+  position:fixed;
+  right:0;
+  top:0;
+  height:100vh;
+  width:440px;
+  max-width:100%;
+  background:white;
+  z-index:200;
+  transform:translateX(100%);
+  transition:.3s ease;
+  display:flex;
+  flex-direction:column;
+  box-shadow:-5px 0 25px rgba(0,0,0,.2);
 }
 
-.call{
- display:block;
- text-align:center;
- text-decoration:none;
- background:#0b74de;
- color:white;
- padding:12px;
- border-radius:10px;
- margin-top:8px;
- font-weight:bold;
+.cart-drawer.open{
+  transform:translateX(0);
 }
 
-.total{
- font-size:18px;
- font-weight:bold;
- margin:12px 0;
+.cart-header{
+  padding:18px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.note{
- font-size:13px;
- color:#555;
+.cart-header h2{
+  margin:0;
 }
 
-.footer{
- background:#138a3d;
- color:white;
- text-align:center;
- padding:25px 15px;
+.close-cart{
+  border:0;
+  background:#f1f1f1;
+  border-radius:8px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:18px;
 }
 
-.footer a{
- color:white;
+.cart-content{
+  flex:1;
+  overflow-y:auto;
+  padding:15px;
 }
 
-@media(max-width:800px){
+/* CART PRODUCT */
 
- .grid{
-  grid-template-columns:repeat(2,1fr);
- }
+.cart-product{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
 
- .photo{
-  height:145px;
- }
+.cart-product-image{
+  width:65px;
+  height:65px;
+  border:1px solid #eee;
+  border-radius:8px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-shrink:0;
+}
 
- .infoGrid{
-  grid-template-columns:repeat(2,1fr);
- }
+.cart-product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.cart-product-info{
+  flex:1;
+}
+
+.cart-product-name{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.cart-product-price{
+  color:#138a3d;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+.cart-qty{
+  display:flex;
+  align-items:center;
+  border:1px solid #138a3d;
+  border-radius:7px;
+  overflow:hidden;
+}
+
+.cart-qty button{
+  width:28px;
+  height:29px;
+  border:0;
+  background:#138a3d;
+  color:white;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.cart-qty span{
+  min-width:27px;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* CHECKOUT */
+
+.checkout{
+  border-top:1px solid #ddd;
+  padding:15px;
+  background:white;
+}
+
+.bill-row{
+  display:flex;
+  justify-content:space-between;
+  margin:7px 0;
+}
+
+.grand-total{
+  font-size:19px;
+  font-weight:bold;
+  padding-top:8px;
+  border-top:1px solid #ddd;
+}
+
+.free-note{
+  font-size:12px;
+  color:#666;
+  margin:8px 0;
+}
+
+.checkout input,
+.checkout textarea{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:9px;
+  padding:11px;
+  margin:5px 0;
+  font-size:14px;
+  outline:none;
+}
+
+.checkout textarea{
+  min-height:65px;
+}
+
+.whatsapp-button{
+  width:100%;
+  border:0;
+  background:#25d366;
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:7px;
+}
+
+.call-button{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  background:#0878d1;
+  color:white;
+  padding:12px;
+  border-radius:10px;
+  margin-top:7px;
+  font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+  background:#138a3d;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+  line-height:1.8;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .product-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .info-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
 }
 
-@media(max-width:430px){
+@media(max-width:600px){
 
- .name{
-  font-size:15px;
- }
+  .header{
+    padding:12px;
+  }
 
- .price{
-  font-size:15px;
- }
+  .logo h1{
+    font-size:19px;
+  }
 
- .photo{
-  height:130px;
- }
+  .logo p{
+    font-size:11px;
+  }
 
- .infoGrid{
-  grid-template-columns:1fr 1fr;
- }
+  .header-cart{
+    font-size:12px;
+    padding:9px 10px;
+  }
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .product{
+    padding:8px;
+    border-radius:12px;
+  }
+
+  .product-image{
+    height:140px;
+  }
+
+  .product-name{
+    font-size:14px;
+  }
+
+  .product-price{
+    font-size:16px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .info{
+    padding:11px;
+    font-size:13px;
+  }
+
+  .cart-drawer{
+    width:100%;
+  }
 
 }
 </style>
 </head>
-
 
 <body>
 
@@ -300,22 +552,13 @@ main{
 
 <div class="header">
 
-<div>
-
+<div class="logo">
 <h1>🛒 Atharv General Store</h1>
-
-<div class="tag">
-Daily Grocery & Household Essentials
+<p>Daily Grocery & Household Essentials</p>
 </div>
 
-</div>
-
-
-<button class="cartBtn" onclick="openCart()">
-
-🛍️ Cart
-(<span id="cartCount">0</span>)
-
+<button class="header-cart" onclick="openCart()">
+🛍️ Cart <span id="headerCount">0</span>
 </button>
 
 </div>
@@ -323,170 +566,1122 @@ Daily Grocery & Household Essentials
 </header>
 
 
-
-<div class="search">
+<div class="search-wrap">
 
 <input
+class="search"
 id="search"
-placeholder="🔍 Search product..."
+type="text"
+placeholder="🔍 Search products..."
 oninput="searchProducts()">
 
 </div>
 
 
-
 <main>
 
-<h2 class="sectionTitle">
+<h2 class="catalog-title">
 🛒 Product Catalog
 </h2>
 
+<div id="products"></div>
 
-<div class="infoGrid">
+
+<section class="store-info">
+
+<h2>📋 Store Information</h2>
+
+<div class="info-grid">
 
 <div class="info">
-
-<b>🚚 Delivery</b>
-
+<div class="info-icon">🚚</div>
+<b>Delivery</b>
 ₹5 delivery<br>
 ₹100+ order = FREE
-
 </div>
 
-
 <div class="info">
-
-<b>💳 Payment</b>
-
+<div class="info-icon">💳</div>
+<b>Payment</b>
 Cash / UPI
-
 </div>
 
-
 <div class="info">
-
-<b>⏰ Timing</b>
-
+<div class="info-icon">⏰</div>
+<b>Timing</b>
 6:00 AM – 10:00 PM
-
 </div>
 
-
 <div class="info">
-
-<b>☎️ Store Call</b>
-
-<a href="tel:8418904414">
+<div class="info-icon">📞</div>
+<b>Call Store</b>
 8418904414
-</a>
-
 </div>
 
-
 <div class="info">
-
-<b>📲 WhatsApp Order</b>
-
-<a
-href="https://wa.me/918418904414"
-target="_blank">
-
-Order on WhatsApp
-
-</a>
-
+<div class="info-icon">📲</div>
+<b>WhatsApp</b>
+Order directly on WhatsApp
 </div>
 
-
 <div class="info">
-
-<b>📍 Location</b>
-
+<div class="info-icon">📍</div>
+<b>Location</b>
 Atharv General Store
-
 </div>
 
 </div>
 
-
-<div id="products"></div>
+</section>
 
 </main>
 
 
+<!-- STICKY CART BAR -->
 
-<!-- CART -->
+<div
+class="cart-bar"
+id="cartBar">
 
-<div id="cartPanel">
+<div class="cart-bar-inner">
+
+<div class="cart-summary">
+
+<strong>
+<span id="barItems">0</span> items
+</strong>
+
+<small>
+₹<span id="barTotal">0</span>
+</small>
+
+</div>
 
 <button
-class="close"
+class="view-cart"
+onclick="openCart()">
+
+View Cart →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- OVERLAY -->
+
+<div
+class="overlay"
+id="overlay"
+onclick="closeCart()">
+</div>
+
+
+<!-- CART DRAWER -->
+
+<div
+class="cart-drawer"
+id="cartDrawer">
+
+
+<div class="cart-header">
+
+<h2>🛒 Your Cart</h2>
+
+<button
+class="close-cart"
 onclick="closeCart()">
 
 ✕
 
 </button>
 
-
-<h2>
-🛒 Cart
-</h2>
+</div>
 
 
-<div id="cartItems"></div>
+<div
+class="cart-content"
+id="cartContent">
+
+</div>
 
 
-<div class="form">
+<div class="checkout">
+
+<div class="bill-row">
+<span>Products</span>
+<strong>₹<span id="subtotal">0</span></strong>
+</div>
+
+<div class="bill-row">
+<span>🚚 Delivery</span>
+<strong>₹<span id="delivery">0</span></strong>
+</div>
+
+<div class="bill-row grand-total">
+<span>Total</span>
+<strong>₹<span id="grandTotal">0</span></strong>
+</div>
+
+<div class="free-note">
+🚚 ₹5 delivery. ₹100+ order par FREE delivery.
+</div>
+
 
 <input
 id="customerName"
-placeholder="👤 Customer name">
-
+placeholder="👤 Your Name">
 
 <input
 id="customerPhone"
 type="tel"
-placeholder="📞 Customer mobile">
-
+placeholder="📞 Your Mobile Number">
 
 <textarea
 id="customerAddress"
-placeholder="🏠 Delivery address">
-</textarea>
-
-</div>
-
-
-<div class="total">
-
-Total bill:
-₹<span id="subtotal">0</span>
-
-</div>
-
-
-<div class="total">
-
-🚚 Delivery:
-₹<span id="delivery">0</span>
-
-</div>
-
-
-<div class="total">
-
-Grand Total:
-₹<span id="grandTotal">0</span>
-
-</div>
-
-
-<div class="note">
-
-🚚 ₹5 delivery / ₹100+ FREE
-
-</div>
+placeholder="🏠 Delivery Address"></textarea>
 
 
 <button
-class="
+class="whatsapp-button"
+onclick="sendWhatsApp()">
+
+📲 Order on WhatsApp
+
+</button>
+
+
+<a
+class="call-button"
+href="tel:8418904414">
+
+☎️ Call Store — 8418904414
+
+</a>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<b>🛒 Atharv General Store</b>
+
+<br>
+
+📍 Atharv General Store
+
+<br>
+
+⏰ 6:00 AM – 10:00 PM
+
+<br>
+
+💳 Cash / UPI
+
+<br>
+
+🚚 ₹5 delivery / ₹100+ FREE
+
+<br>
+
+☎️ 8418904414
+
+</footer>
+
+
+<script>
+
+const products = [
+
+{
+id:1,
+cat:"Maggi & Noodles",
+name:"Maggi - Chhoti Pack",
+price:15,
+img:"maggi-15.jpg"
+},
+
+{
+id:2,
+cat:"Maggi & Noodles",
+name:"Maggi - Badi / Family Pack",
+price:58,
+img:"maggi-family-58.jpg"
+},
+
+{
+id:3,
+cat:"Maggi & Noodles",
+name:"Yippee - Chhoti Pack",
+price:5,
+img:"yippee-5.jpg"
+},
+
+{
+id:4,
+cat:"Chips & Snacks",
+name:"Uncle Chips - Blue / Salted - Chhota",
+price:5,
+img:"uncle-chips-salted-5.jpg"
+},
+
+{
+id:5,
+cat:"Chips & Snacks",
+name:"Uncle Chips - Green / Masala - Chhota",
+price:5,
+img:"uncle-chips-masala-5.jpg"
+},
+
+{
+id:6,
+cat:"Namkeen",
+name:"Haldiram Bhujia - Chhota",
+price:5,
+img:"haldiram-bhujia-5.jpg"
+},
+
+{
+id:7,
+cat:"Namkeen",
+name:"Haldiram Bhujia - Bada",
+price:20,
+img:"haldiram-bhujia-20.jpg"
+},
+
+{
+id:8,
+cat:"Biscuits & Bakery",
+name:"Britannia Rusk - Chhota",
+price:10,
+img:"rusk-10.jpg"
+},
+
+{
+id:9,
+cat:"Biscuits & Bakery",
+name:"Britannia Rusk - Bada",
+price:50,
+img:"rusk-50.jpg"
+},
+
+{
+id:10,
+cat:"Personal Care",
+name:"Godrej Expert Hair Colour - Black",
+price:15,
+img:"godrej-hair-colour-15.jpg"
+},
+
+{
+id:11,
+cat:"Namkeen",
+name:"Besan Bhujia - Chhota",
+price:5,
+img:"besan-bhujia-5.jpg"
+},
+
+{
+id:12,
+cat:"Namkeen",
+name:"Besan Bhujia - Bada",
+price:20,
+img:"besan-bhujia-20.jpg"
+},
+
+{
+id:13,
+cat:"Personal Care",
+name:"Navratna - Chhota",
+price:5,
+img:"navratna-5.jpg"
+},
+
+{
+id:14,
+cat:"Personal Care",
+name:"Navratna - Bada",
+price:20,
+img:"navratna-20.jpg"
+},
+
+{
+id:15,
+cat:"Namkeen",
+name:"Boondi",
+price:10,
+img:"boondi-10.jpg"
+},
+
+{
+id:16,
+cat:"Grocery",
+name:"Nutrela",
+price:10,
+img:"nutrela-10.jpg"
+},
+
+{
+id:17,
+cat:"Baby Care",
+name:"Many Poko Pants - Small",
+price:10,
+img:"many-poko-small-10.jpg"
+},
+
+{
+id:18,
+cat:"Baby Care",
+name:"Many Poko Pants - Large",
+price:12,
+img:"many-poko-large-12.jpg"
+},
+
+{
+id:19,
+cat:"Household",
+name:"Vim - Chhota",
+price:5,
+img:"vim-5.jpg"
+},
+
+{
+id:20,
+cat:"Household",
+name:"Vim - Bada",
+price:10,
+img:"vim-10.jpg"
+},
+
+{
+id:21,
+cat:"Household",
+name:"Surf Excel",
+price:10,
+img:"surf-excel-10.jpg"
+},
+
+{
+id:22,
+cat:"Household",
+name:"Rin",
+price:10,
+img:"rin-10.jpg"
+},
+
+{
+id:23,
+cat:"Chocolates & Candy",
+name:"Chupa Chups",
+price:5,
+img:"chupa-chups-5.jpg"
+},
+
+{
+id:24,
+cat:"Grocery & Dal",
+name:"Macaroni - ₹50/kg",
+price:50,
+img:"macaroni-50.jpg"
+},
+
+{
+id:25,
+cat:"Grocery & Dal",
+name:"Urad Dal - ₹130/kg",
+price:130,
+img:"urad-dal-130.jpg"
+},
+
+{
+id:26,
+cat:"Grocery & Dal",
+name:"Moong Dal - ₹120/kg",
+price:120,
+img:"moong-dal-120.jpg"
+},
+
+{
+id:27,
+cat:"Grocery & Dal",
+name:"Arhar Dal - ₹125/kg",
+price:125,
+img:"arhar-dal-125.jpg"
+},
+
+{
+id:28,
+cat:"Chocolates & Candy",
+name:"KitKat - ₹10",
+price:10,
+img:"kitkat-10.jpg"
+},
+
+{
+id:29,
+cat:"Chocolates & Candy",
+name:"Dairy Milk - Chhoti",
+price:5,
+img:"dairy-milk-5.jpg"
+},
+
+{
+id:30,
+cat:"Chocolates & Candy",
+name:"Dairy Milk - Badi",
+price:10,
+img:"dairy-milk-10.jpg"
+},
+
+{
+id:31,
+cat:"Chips & Snacks",
+name:"Crax - ₹5",
+price:5,
+img:"crax-5.jpg"
+},
+
+{
+id:32,
+cat:"Chips & Snacks",
+name:"Curls Crax - ₹5",
+price:5,
+img:"curls-crax-5.jpg"
+},
+
+{
+id:33,
+cat:"Chocolates & Candy",
+name:"Lotte Choco Pie - ₹10",
+price:10,
+img:"lotte-10.jpg"
+}
+
+];
+
+
+let cart=[];
+
+
+/* RENDER PRODUCTS */
+
+function render(list=products){
+
+const root=document.getElementById("products");
+
+root.innerHTML="";
+
+const groups={};
+
+list.forEach(p=>{
+
+if(!groups[p.cat]){
+groups[p.cat]=[];
+}
+
+groups[p.cat].push(p);
+
+});
+
+
+Object.entries(groups).forEach(([cat,items])=>{
+
+const title=document.createElement("h2");
+
+title.className="category";
+
+title.textContent=cat;
+
+root.appendChild(title);
+
+
+const grid=document.createElement("div");
+
+grid.className="product-grid";
+
+
+items.forEach(p=>{
+
+const card=document.createElement("div");
+
+card.className="product";
+
+
+const image=document.createElement("div");
+
+image.className="product-image";
+
+
+const img=document.createElement("img");
+
+img.src=p.img;
+
+img.alt=p.name;
+
+image.appendChild(img);
+
+card.appendChild(image);
+
+
+const name=document.createElement("div");
+
+name.className="product-name";
+
+name.textContent=p.name;
+
+card.appendChild(name);
+
+
+const price=document.createElement("div");
+
+price.className="product-price";
+
+price.textContent=
+(p.id>=24 && p.id<=27)
+?"₹"+p.price+"/kg"
+:"₹"+p.price;
+
+card.appendChild(price);
+
+
+const area=document.createElement("div");
+
+area.className="add-area";
+
+card.appendChild(area);
+
+
+grid.appendChild(card);
+
+updateProductButton(p,area);
+
+});
+
+
+root.appendChild(grid);
+
+});
+
+}
+
+
+/* PRODUCT ADD BUTTON */
+
+function updateProductButton(product,area){
+
+const item=cart.find(x=>x.id===product.id);
+
+area.innerHTML="";
+
+
+if(!item){
+
+const button=document.createElement("button");
+
+button.className="add-button";
+
+button.textContent="ADD";
+
+button.onclick=()=>{
+
+addToCart(product);
+
+};
+
+area.appendChild(button);
+
+return;
+
+}
+
+
+const control=document.createElement("div");
+
+control.className="quantity-control";
+
+
+control.innerHTML=`
+
+<button onclick="changeQty(${product.id},-1)">
+−
+</button>
+
+<span>${item.qty}</span>
+
+<button onclick="changeQty(${product.id},1)">
++
+</button>
+
+`;
+
+area.appendChild(control);
+
+}
+
+
+/* ADD */
+
+function addToCart(product){
+
+const existing=
+cart.find(x=>x.id===product.id);
+
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+...product,
+qty:1
+});
+
+}
+
+
+updateCart();
+
+}
+
+
+/* QUANTITY */
+
+function changeQty(id,change){
+
+const item=
+cart.find(x=>x.id===id);
+
+
+if(!item)return;
+
+
+item.qty+=change;
+
+
+if(item.qty<=0){
+
+cart=
+cart.filter(x=>x.id!==id);
+
+}
+
+
+updateCart();
+
+}
+
+
+/* UPDATE EVERYTHING */
+
+function updateCart(){
+
+let count=0;
+
+let subtotal=0;
+
+
+cart.forEach(p=>{
+
+count+=p.qty;
+
+subtotal+=p.price*p.qty;
+
+});
+
+
+let delivery=0;
+
+if(subtotal>0 && subtotal<100){
+
+delivery=5;
+
+}
+
+
+let total=
+subtotal+delivery;
+
+
+document.getElementById("headerCount")
+.textContent=count;
+
+
+document.getElementById("barItems")
+.textContent=count;
+
+
+document.getElementById("barTotal")
+.textContent=total;
+
+
+document.getElementById("subtotal")
+.textContent=subtotal;
+
+
+document.getElementById("delivery")
+.textContent=delivery;
+
+
+document.getElementById("grandTotal")
+.textContent=total;
+
+
+/* STICKY BAR */
+
+const bar=
+document.getElementById("cartBar");
+
+
+if(count>0){
+
+bar.style.display="block";
+
+}else{
+
+bar.style.display="none";
+
+}
+
+
+/* CART CONTENT */
+
+const content=
+document.getElementById("cartContent");
+
+content.innerHTML="";
+
+
+if(cart.length===0){
+
+content.innerHTML=`
+
+<div style="
+text-align:center;
+padding:50px 10px;
+color:#777;
+">
+
+<div style="font-size:45px">🛒</div>
+
+<p>Your cart is empty</p>
+
+</div>
+
+`;
+
+}else{
+
+cart.forEach(p=>{
+
+const item=
+document.createElement("div");
+
+item.className="cart-product";
+
+
+item.innerHTML=`
+
+<div class="cart-product-image">
+
+<img
+src="${p.img}"
+alt="${p.name}">
+
+</div>
+
+
+<div class="cart-product-info">
+
+<div class="cart-product-name">
+${p.name}
+</div>
+
+<div class="cart-product-price">
+₹${p.price}
+</div>
+
+</div>
+
+
+<div class="cart-qty">
+
+<button onclick="changeQty(${p.id},-1)">
+−
+</button>
+
+<span>${p.qty}</span>
+
+<button onclick="changeQty(${p.id},1)">
++
+</button>
+
+</div>
+
+`;
+
+
+content.appendChild(item);
+
+});
+
+}
+
+
+/* UPDATE PRODUCT BUTTONS */
+
+renderCurrentButtons();
+
+}
+
+
+/* Don't rebuild whole catalog */
+
+function renderCurrentButtons(){
+
+const cards=
+document.querySelectorAll(".product");
+
+
+cards.forEach(card=>{
+
+const img=
+card.querySelector(".product-image img");
+
+if(!img)return;
+
+
+const product=
+products.find(p=>p.img===img.getAttribute("src"));
+
+if(!product)return;
+
+
+const area=
+card.querySelector(".add-area");
+
+if(area){
+
+updateProductButton(product,area);
+
+}
+
+});
+
+}
+
+
+/* OPEN CART */
+
+function openCart(){
+
+document
+.getElementById("cartDrawer")
+.classList.add("open");
+
+document
+.getElementById("overlay")
+.classList.add("active");
+
+updateCart();
+
+}
+
+
+/* CLOSE CART */
+
+function closeCart(){
+
+document
+.getElementById("cartDrawer")
+.classList.remove("open");
+
+document
+.getElementById("overlay")
+.classList.remove("active");
+
+}
+
+
+/* SEARCH */
+
+function searchProducts(){
+
+const q=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+
+const result=
+products.filter(p=>
+
+(p.name+" "+p.cat)
+.toLowerCase()
+.includes(q)
+
+);
+
+
+render(result);
+
+}
+
+
+/* WHATSAPP */
+
+function sendWhatsApp(){
+
+if(cart.length===0){
+
+alert("Cart empty hai. Pehle product add karo.");
+
+return;
+
+}
+
+
+const name=
+document.getElementById("customerName")
+.value.trim();
+
+
+const phone=
+document.getElementById("customerPhone")
+.value.trim();
+
+
+const address=
+document.getElementById("customerAddress")
+.value.trim();
+
+
+if(!name || !phone || !address){
+
+alert(
+"Please Name, Mobile Number aur Delivery Address bharo."
+);
+
+return;
+
+}
+
+
+let subtotal=
+cart.reduce(
+(sum,p)=>sum+(p.price*p.qty),
+0
+);
+
+
+let delivery=
+subtotal>=100 ? 0 : 5;
+
+
+let total=
+subtotal+delivery;
+
+
+let productText=
+cart.map(p=>
+
+`• ${p.name} × ${p.qty} = ₹${p.price*p.qty}`
+
+).join("\n");
+
+
+let message=
+
+`🛒 ATHARV GENERAL STORE
+
+📦 NEW ORDER
+
+👤 Customer Name:
+${name}
+
+📞 Customer Mobile:
+${phone}
+
+🏠 Delivery Address:
+${address}
+
+🛍️ PRODUCTS:
+${productText}
+
+💰 Products Total: ₹${subtotal}
+
+🚚 Delivery: ${
+delivery===0 ? "FREE" : "₹5"
+}
+
+✅ GRAND TOTAL: ₹${total}
+
+💳 Payment: Cash / UPI`;
+
+
+const storeNumber=
+"918418904414";
+
+
+const url=
+"https://wa.me/"
++
+storeNumber
++
+"?text="
++
+encodeURIComponent(message);
+
+
+window.open(url,"_blank");
+
+}
+
+
+/* INITIAL */
+
+render();
+
+</script>
+
+</body>
+ </html>
+ index.html
+maggi-15.jpg
+maggi-family-58.jpg
+yippee-5.jpg
+uncle-chips-salted-5.jpg
+uncle-chips-masala-5.jpg
+haldiram-bhujia-5.jpg
+haldiram-bhujia-20.jpg
+rusk-10.jpg
+rusk-50.jpg
+godrej-hair-colour-15.jpg
+besan-bhujia-5.jpg
+besan-bhujia-20.jpg
+navratna-5.jpg
+navratna-20.jpg
+boondi-10.jpg
+nutrela-10.jpg
+many-poko-small-10.jpg
+many-poko-large-12.jpg
+vim-5.jpg
+vim-10.jpg
+surf-excel-10.jpg
+rin-10.jpg
+chupa-chups-5.jpg
+macaroni-50.jpg
+urad-dal-130.jpg
+moong-dal-120.jpg
+arhar-dal-125.jpg
+kitkat-10.jpg
+dairy-milk-5.jpg
+dairy-milk-10.jpg
+crax-5.jpg
+curls-crax-5.jpg
+lotte-10.jpg
