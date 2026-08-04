@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Atharv General Store</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#f5f7f6;color:#222}
+header{background:#138a3d;color:#fff;padding:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.header-row{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-size:24px;font-weight:bold} .subtitle{font-size:13px;margin-top:4px;opacity:.9}
+.cart-btn{border:0;background:#fff;color:#138a3d;padding:11px 15px;border-radius:10px;font-weight:bold;cursor:pointer}
+.search{display:block;width:calc(100% - 30px);max-width:700px;margin:18px auto;padding:15px 17px;border:1px solid #ddd;border-radius:13px;font-size:16px;outline:none}
+.categories{max-width:1180px;margin:auto;padding:0 15px 15px;display:flex;gap:8px;overflow-x:auto}
+.categories button{white-space:nowrap;border:1px solid #138a3d;background:#fff;color:#138a3d;padding:8px 14px;border-radius:20px;cursor:pointer}
+.categories button.active{background:#138a3d;color:#fff}
+.container{max-width:1180px;margin:auto;padding:5px 15px 100px}
+.catalog-title{font-size:25px;margin:12px 0 20px}
+.category-title{font-size:21px;margin:28px 0 14px;border-left:5px solid #138a3d;padding-left:10px}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.product{background:#fff;border-radius:15px;padding:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden}
+.product-image{width:100%;height:190px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:11px;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:contain;display:block}
+.product-emoji{font-size:75px;line-height:1}
+.photo-loading{color:#999;font-size:13px}
+.product-name{font-size:15px;font-weight:bold;line-height:1.3;margin:10px 2px 5px;min-height:40px}
+.product-price{color:#138a3d;font-size:18px;font-weight:bold;margin:6px 2px 10px}
+.add-area{height:39px}
+.add-button{width:100%;height:39px;background:#fff;color:#138a3d;border:1.5px solid #138a3d;border-radius:8px;font-weight:bold;cursor:pointer}
+.quantity-control{width:100%;height:39px;background:#138a3d;border-radius:8px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;color:#fff;font-weight:bold}
+.quantity-control button{width:38px;height:100%;border:0;background:#138a3d;color:#fff;font-size:21px;cursor:pointer}
+.quantity-control span{font-size:15px}
+.cart-drawer{position:fixed;right:0;top:0;width:440px;max-width:100%;height:100vh;background:#fff;z-index:300;transform:translateX(100%);transition:.3s;display:flex;flex-direction:column;box-shadow:-5px 0 25px rgba(0,0,0,.2)}
+.cart-drawer.open{transform:translateX(0)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:250} .overlay.active{display:block}
+.cart-header{padding:18px;display:flex;justify-content:space-between;border-bottom:1px solid #eee}
+.close-cart{border:0;background:#eee;border-radius:8px;padding:7px 11px;cursor:pointer}
+.cart-content{flex:1;overflow-y:auto;padding:15px}
+.cart-product{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.cart-product-image{width:65px;height:65px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cart-product-image img{width:100%;height:100%;object-fit:contain}
+.cart-emoji{font-size:40px}
+.cart-product-info{flex:1} .cart-product-name{font-size:14px;font-weight:bold}
+.cart-product-price{color:#138a3d;font-weight:bold;margin-top:4px}
+.cart-qty{display:flex;align-items:center;border:1px solid #138a3d;border-radius:7px;overflow:hidden}
+.cart-qty button{width:28px;height:29px;border:0;background:#138a3d;color:#fff;font-size:17px}
+.cart-qty span{min-width:27px;text-align:center;font-weight:bold}
+.checkout{border-top:1px solid #ddd;padding:15px}
+.bill-row{display:flex;justify-content:space-between;margin:7px 0}
+.grand-total{border-top:1px solid #ddd;padding-top:9px;font-size:19px;font-weight:bold}
+.checkout input,.checkout textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:9px;margin-top:7px;outline:none}
+.checkout textarea{min-height:65px}
+.whatsapp-button{width:100%;border:0;background:#25d366;color:#fff;padding:14px;border-radius:10px;margin-top:8px;font-size:16px;font-weight:bold;cursor:pointer}
+.call-button{display:block;text-align:center;background:#0878d1;color:#fff;text-decoration:none;padding:12px;border-radius:10px;margin-top:7px;font-weight:bold}
+@media(max-width:850px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.logo{font-size:19px}.subtitle{font-size:11px}.product-grid{grid-template-columns:repeat(2,1fr);gap:10px}.product{padding:8px}.product-image{height:145px}.product-name{font-size:14px}.product-price{font-size:16px}}
+</style>
+</head>
+<body>
+<header><div class="header-row"><div><div class="logo">🛒 Atharv General Store</div><div class="subtitle">Daily Grocery & Household Essentials</div></div><button class="cart-btn" onclick="openCart()">🛍️ Cart <span id="cartCount">0</span></button></div></header>
+
+<input id="search" class="search" placeholder="🔍 Search products..." oninput="renderProducts()">
+
+<div class="categories">
+<button class="active" onclick="setCategory('All',this)">All</button>
+<button onclick="setCategory('Maggi & Noodles',this)">🍜 Maggi & Noodles</button>
+<button onclick="setCategory('Chips & Snacks',this)">🥔 Chips & Snacks</button>
+<button onclick="setCategory('Namkeen',this)">🥜 Namkeen</button>
+<button onclick="setCategory('Biscuits & Bakery',this)">🍪 Biscuits</button>
+<button onclick="setCategory('Chocolates & Candy',this)">🍫 Chocolates</button>
+<button onclick="setCategory('Personal Care',this)">🧴 Personal Care</button>
+<button onclick="setCategory('Household',this)">🧹 Household</button>
+<button onclick="setCategory('Grocery & Dal',this)">🛒 Grocery</button>
+<button onclick="setCategory('Dairy & Bakery',this)">🥛 Dairy</button>
+<button onclick="setCategory('Grocery & Spices',this)">🌿 Spices</button>
+<button onclick="setCategory('Puja & Fragrance',this)">🪔 Puja</button>
+</div>
+
+<main class="container"><h2 class="catalog-title">🛒 Product Catalog</h2><div id="products"></div></main>
+
+<div id="overlay" class="overlay" onclick="closeCart()"></div>
+<div id="cartDrawer" class="cart-drawer">
+<div class="cart-header"><h2>🛒 Your Cart</h2><button class="close-cart" onclick="closeCart()">✕</button></div>
+<div id="cartContent" class="cart-content"></div>
+<div class="checkout">
+<div class="bill-row"><span>Products</span><strong>₹<span id="subtotal">0</span></strong></div>
+<div class="bill-row"><span>🚚 Delivery</span><strong>₹<span id="delivery">0</span></strong></div>
+<div class="bill-row grand-total"><span>Total</span><strong>₹<span id="grandTotal">0</span></strong></div>
+<input id="customerName" placeholder="👤 Your Name">
+<input id="customerPhone" type="tel" placeholder="📞 Your Mobile Number">
+<textarea id="customerAddress" placeholder="🏠 Delivery Address"></textarea>
+<button class="whatsapp-button" onclick="sendWhatsApp()">📲 Order on WhatsApp</button>
+<a href="tel:8418904414" class="call-button">☎️ Call Store — 8418904414</a>
+</div></div>
+
+<script>
+const products=[
+{id:1,cat:'Maggi & Noodles',name:'Maggi - Chhoti Pack',price:15,search:'Maggi 2 Minute Masala Noodles',emoji:'🍜'},
+{id:2,cat:'Maggi & Noodles',name:'Maggi - Badi / Family Pack',price:58,search:'Maggi 2 Minute Masala Noodles family pack',emoji:'🍜'},
+{id:3,cat:'Maggi & Noodles',name:'Yippee - Chhoti Pack',price:5,search:'Sunfeast YiPPee noodles',emoji:'🍜'},
+{id:4,cat:'Chips & Snacks',name:'Uncle Chips - Blue / Salted - Chhota',price:5,search:'Uncle Chipps salted',emoji:'🥔'},
+{id:5,cat:'Chips & Snacks',name:'Uncle Chips - Green / Masala - Chhota',price:5,search:'Uncle Chipps masala',emoji:'🥔'},
+{id:6,cat:'Namkeen',name:'Haldiram Bhujia - Chhota',price:5,search:'Haldiram Bhujia',emoji:'🥜'},
+{id:7,cat:'Namkeen',name:'Haldiram Bhujia - Bada',price:20,search:'Haldiram Bhujia',emoji:'🥜'},
+{id:8,cat:'Biscuits & Bakery',name:'Britannia Rusk - Chhota',price:10,search:'Britannia Toastea Rusk',emoji:'🍞'},
+{id:9,cat:'Biscuits & Bakery',name:'Britannia Rusk - Bada',price:50,search:'Britannia Toastea Rusk',emoji:'🍞'},
+{id:10,cat:'Personal Care',name:'Godrej Expert Hair Colour - Black',price:15,search:'Godrej Expert hair colour black',emoji:'🧴'},
+{id:11,cat:'Namkeen',name:'Besan Bhujia - Chhota',price:5,search:'Besan Bhujia',emoji:'🥜'},
+{id:12,cat:'Namkeen',name:'Besan Bhujia - Bada',price:20,search:'Besan Bhujia',emoji:'🥜'},
+{id:13,cat:'Personal Care',name:'Navratna - Chhota',price:5,search:'Navratna hair oil',emoji:'🧴'},
+{id:14,cat:'Personal Care',name:'Navratna - Bada',price:20,search:'Navratna hair oil',emoji:'🧴'},
+{id:15,cat:'Namkeen',name:'Boondi',price:10,search:'Boondi namkeen',emoji:'🥜'},
+{id:16,cat:'Grocery & Dal',name:'Nutrela',price:10,search:'Nutrela soya chunks',emoji:'🌾'},
+{id:17,cat:'Household',name:'Many Poko Pants - Small',price:10,search:'Many Poko Pants small',emoji:'🧷'},
+{id:18,cat:'Household',name:'Many Poko Pants - Large',price:12,search:'Many Poko Pants large',emoji:'🧷'},
+{id:19,cat:'Household',name:'Vim - Chhota',price:5,search:'Vim dishwash bar',emoji:'🧼'},
+{id:20,cat:'Household',name:'Vim - Bada',price:10,search:'Vim dishwash',emoji:'🧼'},
+{id:21,cat:'Household',name:'Surf Excel',price:10,search:'Surf Excel detergent',emoji:'🧺'},
+{id:22,cat:'Household',name:'Rin',price:10,search:'Rin detergent',emoji:'🧺'},
+{id:23,cat:'Chocolates & Candy',name:'Chupa Chups',price:5,search:'Chupa Chups',emoji:'🍭'},
+{id:24,cat:'Grocery & Dal',name:'Macaroni - ₹50/kg',price:50,search:'macaroni',emoji:'🍝'},
+{id:25,cat:'Grocery & Dal',name:'Urad Dal - ₹130/kg',price:130,search:'urad dal',emoji:'🫘'},
+{id:26,cat:'Grocery & Dal',name:'Moong Dal - ₹120/kg',price:120,search:'moong dal',emoji:'🫘'},
+{id:27,cat:'Grocery & Dal',name:'Arhar Dal - ₹125/kg',price:125,search:'arhar dal',emoji:'🫘'},
+{id:28,cat:'Chocolates & Candy',name:'KitKat - ₹10',price:10,search:'KitKat chocolate',emoji:'🍫'},
+{id:29,cat:'Chocolates & Candy',name:'Dairy Milk - Chhoti',price:5,search:'Cadbury Dairy Milk chocolate',emoji:'🍫'},
+{id:30,cat:'Chocolates & Candy',name:'Dairy Milk - Badi',price:10,search:'Cadbury Dairy Milk chocolate',emoji:'🍫'},
+{id:31,cat:'Chips & Snacks',name:'Crax - ₹5',price:5,search:'Crax snacks',emoji:'🥨'},
+{id:32,cat:'Chips & Snacks',name:'Curls Crax - ₹5',price:5,search:'Crax Curls',emoji:'🥨'},
+{id:33,cat:'Chocolates & Candy',name:'Lotte Choco Pie - ₹10',price:10,search:'Lotte Choco Pie',emoji:'🍫'},
+{id:34,cat:'Dairy & Bakery',name:'Milk - Bada Pack',price:35,search:'milk 1 litre packet India',emoji:'🥛'},
+{id:35,cat:'Dairy & Bakery',name:'Milk - Chhota Pack',price:10,search:'milk small packet India',emoji:'🥛'},
+{id:36,cat:'Dairy & Bakery',name:'Dahi - Bada Pack',price:35,search:'dahi curd packet India',emoji:'🥣'},
+{id:37,cat:'Dairy & Bakery',name:'Dahi - Chhota Pack',price:10,search:'dahi curd small packet India',emoji:'🥣'},
+{id:38,cat:'Dairy & Bakery',name:'Buttermilk / Chach',price:10,search:'buttermilk chach India',emoji:'🥛'},
+{id:39,cat:'Dairy & Bakery',name:'Milkmaid Bread - ₹35',price:35,search:'Milkmaid bread India',emoji:'🍞'},
+{id:40,cat:'Dairy & Bakery',name:'Bread - ₹20',price:20,search:'bread packet India 20',emoji:'🍞'},
+{id:41,cat:'Dairy & Bakery',name:'Bread - ₹10',price:10,search:'bread packet India 10',emoji:'🍞'},
+{id:42,cat:'Grocery & Dal',name:'Sugar - 1 kg',price:52,search:'sugar 1 kg India',emoji:'🧂'},
+{id:43,cat:'Grocery & Dal',name:'Nature Fresh Refined Oil',price:150,search:'Nature Fresh refined oil',emoji:'🫗'},
+{id:44,cat:'Grocery & Dal',name:'Shakti Refined Oil',price:125,search:'Shakti refined oil',emoji:'🫗'},
+{id:45,cat:'Grocery & Dal',name:'Bail Kolhu Mustard Oil - 1 Litre',price:190,search:'Bail Kolhu mustard oil 1 litre',emoji:'🫗'},
+{id:46,cat:'Grocery & Dal',name:'Bail Kolhu Mustard Oil - ½ Litre',price:95,search:'Bail Kolhu mustard oil 500 ml',emoji:'🫗'},
+{id:47,cat:'Grocery & Dal',name:'Chakra Oil - ½ Litre',price:92,search:'Chakra oil 500 ml',emoji:'🫗'},
+{id:48,cat:'Grocery & Dal',name:'Tata Namak',price:32,search:'Tata Salt',emoji:'🧂'},
+{id:49,cat:'Personal Care',name:'Shampoo Sachet - ₹1 (Dove / Clinic Plus / Vatika / Sunsilk etc.)',price:1,search:'shampoo sachet India Dove Clinic Plus Vatika Sunsilk',emoji:'🧴'},
+{id:50,cat:'Personal Care',name:'Shampoo Sachet - ₹2 (Dove / Clinic Plus / Vatika / Sunsilk etc.)',price:2,search:'shampoo sachet India Dove Clinic Plus Vatika Sunsilk',emoji:'🧴'},
+{id:51,cat:'Biscuits & Bakery',name:'Good Day Biscuit - ₹5 / ₹10',price:5,search:'Britannia Good Day biscuits',emoji:'🍪'},
+{id:52,cat:'Biscuits & Bakery',name:'Jeera Crunch Biscuit - ₹5 / ₹10',price:5,search:'Jeera Crunch biscuit India',emoji:'🍪'},
+{id:53,cat:'Biscuits & Bakery',name:'Parle Biscuit - ₹5 / ₹10',price:5,search:'Parle biscuit India',emoji:'🍪'},
+{id:54,cat:'Biscuits & Bakery',name:'Chocolate Bounce - ₹5 / ₹10',price:5,search:'Chocolate Bounce biscuit India',emoji:'🍪'},
+{id:55,cat:'Biscuits & Bakery',name:'Dream Lite Biscuit - ₹5 / ₹10',price:5,search:'Dream Lite biscuit India',emoji:'🍪'},
+{id:56,cat:'Biscuits & Bakery',name:'Cheese Cracker - ₹5 / ₹10',price:5,search:'cheese cracker biscuit India',emoji:'🧀'},
+{id:57,cat:'Biscuits & Bakery',name:'CNC Biscuit - ₹5 / ₹10',price:5,search:'CNC biscuit India',emoji:'🍪'},
+{id:58,cat:'Biscuits & Bakery',name:'Coconut Biscuit - ₹5 / ₹10',price:5,search:'coconut biscuit India',emoji:'🥥'},
+{id:59,cat:'Biscuits & Bakery',name:'Bakery Biscuit - ₹50 to ₹90',price:50,search:'bakery biscuits India',emoji:'🍪'},
+{id:60,cat:'Household',name:'Harpic - Bada',price:110,search:'Harpic toilet cleaner large',emoji:'🧴'},
+{id:61,cat:'Household',name:'Harpic - Chhota',price:46,search:'Harpic toilet cleaner small',emoji:'🧴'},
+{id:62,cat:'Household',name:'Goodknight Machine',price:105,search:'Goodknight mosquito machine',emoji:'🦟'},
+{id:63,cat:'Household',name:'Goodknight Refill',price:85,search:'Goodknight refill',emoji:'🧴'},
+{id:64,cat:'Puja & Fragrance',name:'Mangaldeep Dhoop Batti - ₹20',price:20,search:'Mangaldeep dhoop batti',emoji:'🪔'},
+{id:65,cat:'Puja & Fragrance',name:'Mangaldeep Dhoop Batti - ₹10',price:10,search:'Mangaldeep dhoop batti 10',emoji:'🪔'},
+{id:66,cat:'Personal Care',name:'Dettol Soap - Chhota',price:10,search:'Dettol soap India',emoji:'🧼'},
+{id:67,cat:'Personal Care',name:'Dettol Soap - Bada',price:42,search:'Dettol soap India',emoji:'🧼'},
+{id:68,cat:'Personal Care',name:'Lifebuoy Soap - Chhota',price:10,search:'Lifebuoy soap India',emoji:'🧼'},
+{id:69,cat:'Personal Care',name:'Lifebuoy Soap - Bada',price:42,search:'Lifebuoy soap India',emoji:'🧼'},
+{id:70,cat:'Personal Care',name:'Santoor Soap - Chhota',price:10,search:'Santoor soap India',emoji:'🧼'},
+{id:71,cat:'Personal Care',name:'Santoor Soap - Bada',price:42,search:'Santoor soap India',emoji:'🧼'},
+{id:72,cat:'Personal Care',name:'Lux Soap - Chhota',price:10,search:'Lux soap India',emoji:'🧼'},
+{id:73,cat:'Personal Care',name:'Lux Soap - Bada',price:42,search:'Lux soap India',emoji:'🧼'},
+{id:74,cat:'Personal Care',name:'Savlon Soap - Chhota',price:10,search:'Savlon soap India',emoji:'🧼'},
+{id:75,cat:'Personal Care',name:'Savlon Soap - Bada',price:42,search:'Savlon soap India',emoji:'🧼'},
+{id:76,cat:'Grocery & Spices',name:'Jeera Packet - 50g',price:25,search:'jeera cumin packet 50g India',emoji:'🌿'},
+{id:77,cat:'Grocery & Spices',name:'Ajwain Packet - 40g',price:25,search:'ajwain carom seeds packet 40g India',emoji:'🌿'},
+{id:78,cat:'Grocery & Spices',name:'Haldi - 10g Pack',price:10,search:'turmeric powder 10 rupees India',emoji:'🌿'},
+{id:79,cat:'Grocery & Spices',name:'Haldi - 500g Pack',price:76,search:'turmeric powder 500g India',emoji:'🌿'},
+{id:80,cat:'Grocery & Spices',name:'Red Chilli Powder - Small Pack',price:10,search:'red chilli powder 10 rupees India',emoji:'🌶️'},
+{id:81,cat:'Grocery & Spices',name:'Red Chilli Powder - 500g',price:65,search:'red chilli powder 500g India',emoji:'🌶️'},
+{id:82,cat:'Grocery & Spices',name:'Coriander Powder - Small Pack',price:10,search:'coriander powder 10 rupees India',emoji:'🌿'},
+{id:83,cat:'Grocery & Spices',name:'Coriander Powder - 500g',price:44,search:'coriander powder 500g India',emoji:'🌿'},
+{id:84,cat:'Dairy & Bakery',name:'Amul Butter - Chhota',price:15,search:'Amul butter small pack',emoji:'🧈'}
+];
+
+let cart=[];
+let currentCategory="All";
+
+/* Internet photo:
+   1) Open Food Facts API se product image dhundhega.
+   2) Image mil gayi to real product photo.
+   3) Image nahi mili / internet blocked / image error hua to emoji.
+*/
+async function findPhoto(product){
+  const box=document.getElementById("photo-"+product.id);
+  if(!box)return;
+
+  const queries=[product.search, product.name];
+  for(const query of queries){
+    try{
+      const api="https://world.openfoodfacts.org/cgi/search.pl?search_terms="+encodeURIComponent(query)+"&search_simple=1&action=process&json=1&page_size=20";
+      const response=await fetch(api);
+      if(!response.ok) continue;
+      const data=await response.json();
+      const list=Array.isArray(data.products)?data.products:[];
+      const found=list.find(x=>x.image_front_url||x.image_url||x.image_front_small_url);
+      if(found){
+        const url=found.image_front_url||found.image_url||found.image_front_small_url;
+        const img=new Image();
+        img.onload=()=>{
+          box.innerHTML="";
+          img.alt=product.name;
+          img.loading="lazy";
+          img.className="real-photo";
+          box.appendChild(img);
+        };
+        img.onerror=()=>{};
+        img.src=url;
+        return;
+      }
+    }catch(e){}
+  }
+  box.innerHTML='<div class="product-emoji">'+product.emoji+'</div>';
+}
+
+function renderProducts(){
+  const root=document.getElementById("products");
+  root.innerHTML="";
+  const query=document.getElementById("search").value.toLowerCase().trim();
+
+  const filtered=products.filter(p=>
+    (currentCategory==="All"||p.cat===currentCategory) &&
+    (p.name+" "+p.cat+" "+p.search).toLowerCase().includes(query)
+  );
+
+  const groups={};
+  filtered.forEach(p=>{(groups[p.cat]??=[]).push(p)});
+
+  Object.entries(groups).forEach(([cat,items])=>{
+    const title=document.createElement("h2");
+    title.className="category-title";
+    title.textContent=cat;
+    root.appendChild(title);
+
+    const grid=document.createElement("div");
+    grid.className="product-grid";
+
+    items.forEach(product=>{
+      const card=document.createElement("div");
+      card.className="product";
+
+      const image=document.createElement("div");
+      image.className="product-image";
+      image.id="photo-"+product.id;
+      image.innerHTML='<div class="product-emoji">'+product.emoji+'</div>';
+      card.appendChild(image);
+
+      const name=document.createElement("div");
+      name.className="product-name";
+      name.textContent=product.name;
+      card.appendChild(name);
+
+      const price=document.createElement("div");
+      price.className="product-price";
+      price.textContent=(product.id>=24&&product.id<=27)?"₹"+product.price+"/kg":"₹"+product.price;
+      card.appendChild(price);
+
+      const area=document.createElement("div");
+      area.className="add-area";
+      card.appendChild(area);
+      updateProductButton(product,area);
+      grid.appendChild(card);
+    });
+
+    root.appendChild(grid);
+    items.forEach(findPhoto);
+  });
+}
+
+function updateProductButton(product,area){
+  const item=cart.find(x=>x.id===product.id);
+  area.innerHTML="";
+  if(!item){
+    const b=document.createElement("button");
+    b.className="add-button";
+    b.textContent="ADD";
+    b.onclick=()=>addToCart(product);
+    area.appendChild(b);
+    return;
+  }
+  const control=document.createElement("div");
+  control.className="quantity-control";
+  control.innerHTML='<button onclick="changeQty('+product.id+',-1)">−</button><span>'+item.qty+'</span><button onclick="changeQty('+product.id+',1)">+</button>';
+  area.appendChild(control);
+}
+
+function addToCart(product){
+  const item=cart.find(x=>x.id===product.id);
+  if(item)item.qty++; else cart.push({...product,qty:1});
+  updateCart();
+  renderProducts();
+}
+
+function changeQty(id,change){
+  const item=cart.find(x=>x.id===id);
+  if(!item)return;
+  item.qty+=change;
+  if(item.qty<=0)cart=cart.filter(x=>x.id!==id);
+  updateCart();
+  renderProducts();
+}
+
+function updateCart(){
+  let count=0,subtotal=0;
+  cart.forEach(p=>{count+=p.qty;subtotal+=p.price*p.qty});
+  const delivery=subtotal>0&&subtotal<100?5:0;
+  document.getElementById("cartCount").textContent=count;
+  document.getElementById("subtotal").textContent=subtotal;
+  document.getElementById("delivery").textContent=delivery;
+  document.getElementById("grandTotal").textContent=subtotal+delivery;
+
+  const content=document.getElementById("cartContent");
+  content.innerHTML="";
+  if(!cart.length){
+    content.innerHTML='<div style="text-align:center;padding:50px 10px;color:#777">Your cart is empty</div>';
+    return;
+  }
+
+  cart.forEach(p=>{
+    const item=document.createElement("div");
+    item.className="cart-product";
+    item.innerHTML='<div class="cart-product-image"><div class="cart-emoji">'+p.emoji+'</div></div>'+
+      '<div class="cart-product-info"><div class="cart-product-name">'+p.name+'</div><div class="cart-product-price">₹'+(p.price*p.qty)+'</div></div>'+
+      '<div class="cart-qty"><button onclick="changeQty('+p.id+',-1)">−</button><span>'+p.qty+'</span><button onclick="changeQty('+p.id+',1)">+</button></div>';
+    content.appendChild(item);
+    loadCartPhoto(p,item.querySelector(".cart-product-image"));
+  });
+}
+
+async function loadCartPhoto(product,box){
+  try{
+    const api="https://world.openfoodfacts.org/cgi/search.pl?search_terms="+encodeURIComponent(product.search)+"&search_simple=1&action=process&json=1&page_size=10";
+    const r=await fetch(api);
+    if(!r.ok)return;
+    const d=await r.json();
+    const p=(d.products||[]).find(x=>x.image_front_url||x.image_url);
+    if(p){
+      const url=p.image_front_url||p.image_url;
+      const img=new Image();
+      img.onload=()=>{box.innerHTML="";img.alt=product.name;box.appendChild(img)};
+      img.src=url;
+    }
+  }catch(e){}
+}
+
+function openCart(){
+  document.getElementById("cartDrawer").classList.add("open");
+  document.getElementById("overlay").classList.add("active");
+  updateCart();
+}
+function closeCart(){
+  document.getElementById("cartDrawer").classList.remove("open");
+  document.getElementById("overlay").classList.remove("active");
+}
+function setCategory(category,button){
+  currentCategory=category;
+  document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  renderProducts();
+}
+
+function sendWhatsApp(){
+  if(!cart.length){alert("Cart empty hai.");return;}
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const address=document.getElementById("customerAddress").value.trim();
+  if(!name||!phone||!address){alert("Name, Mobile Number aur Address bharo.");return;}
+
+  let subtotal=0;
+  const lines=cart.map(p=>{
+    const amount=p.price*p.qty;
+    subtotal+=amount;
+    return "• "+p.name+" × "+p.qty+" = ₹"+amount;
+  });
+  const delivery=subtotal>0&&subtotal<100?5:0;
+  const total=subtotal+delivery;
+
+  const message=
+    "🛒 *Atharv General Store Order*\n\n"+
+    "👤 Name: "+name+"\n"+
+    "📞 Mobile: "+phone+"\n"+
+    "🏠 Address: "+address+"\n\n"+
+    "*Products:*\n"+lines.join("\n")+
+    "\n\nProducts: ₹"+subtotal+
+    "\nDelivery: ₹"+delivery+
+    "\n*Total: ₹"+total+"*";
+
+  window.open("https://wa.me/918418904414?text="+encodeURIComponent(message),"_blank");
+}
+
+renderProducts();
+</script>
+</body>
+</html>
